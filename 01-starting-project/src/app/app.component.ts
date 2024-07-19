@@ -9,7 +9,7 @@ import { DUMMY_USERS } from './dummy-users';
     })
 export class AppComponent {
   users=DUMMY_USERS;
-  selectedUserId='u1';
+  selectedUserId='';
 
   get selectedUser(){
     return this.users.find((user)=>user.id==this.selectedUserId)!;

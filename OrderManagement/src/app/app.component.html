@@ -1,0 +1,19 @@
+
+<header>
+    <h1>{{title}}</h1>
+    <h3>Welcome User!</h3>
+</header>
+<div class="operations">
+    <button (click)="fetchData()">Get Items</button>
+    <button (click)="fetchData()">Insert Item</button>
+    <button (click)="fetchData()">Bulk Insert Items</button>
+    <button (click)="onUpdateData()">Update Item</button>
+    <button (click)="fetchData()">Delete Item</button>
+    
+</div>
+
+<div class="item-grid">
+<app-grid-items *ngIf="selected=='fetch'" [itemData]="itemData"></app-grid-items>
+<app-update-items *ngIf="selected=='update'" (update)="updateData($event)"/>
+
+</div>

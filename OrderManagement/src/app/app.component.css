@@ -1,0 +1,52 @@
+
+header{
+    display: flex;
+    background-color: #433352;
+    color: white;
+    align-items: center;
+}
+header h1{
+    padding: 0.4rem;
+}
+header h3{
+margin-top: auto;
+margin-left: auto;
+padding:0.4rem;
+}
+
+.operations{
+    display: flex;
+    flex-wrap: wrap;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-top: 1rem;
+
+
+}
+.operations button{
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.5rem;
+    background-color: #987D9A;
+    color: white;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    flex: 1 1 auto;
+    min-width: 10 rem;
+    text-align: left;
+  
+
+}
+.operations button:hover,
+.operations button:active,
+.active {
+  background-color: #EECEB9;
+  color: #433352;
+}
+
+.item-grid{
+    margin: 2rem;
+}
+

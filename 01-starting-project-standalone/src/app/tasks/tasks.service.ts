@@ -10,7 +10,7 @@ export class TasksService{
           title: 'Master Angular',
           summary:
             'Learn all the basic and advanced features of Angular & how to apply them.',
-          dueDate: '2025-12-31',
+          dueDate: '2025-12-31',  
         },
         {
           id: 't2',
