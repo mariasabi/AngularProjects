@@ -1,41 +1,64 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ItemData } from './item.model';
+import { ApiService } from './api.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent{
-  constructor(private http: HttpClient) { }
+  constructor(private apiService:ApiService){}
   title = 'Order Management Application';
   itemData:any;
   selected?:string;
-
-  fetchData() {
-    this.http.get('https://localhost:7196/api/Order/getItems').subscribe(data => {
-      console.log(data);
-      this.itemData=data;
-    });
-    this.selected='fetch'
+ message:string='';
+  async fetchData() {
+    this.message='';
+    this.itemData=await this.apiService.getItems();
+    console.log(this.itemData);
+    this.selected='fetch';
   }
 
   onUpdateData(){
-        this.selected="update";
+      this.message='';
+      this.selected="update";
   }
-
-  updateData(inputData:ItemData) {
-    const headers=new HttpHeaders({
-      'Content-Type':'application/json'
-    })
-    this.http.put<ItemData>('https://localhost:7196/api/DynamicOrder/updateItemDynamic',inputData, { headers }).subscribe({
-      next: response => {
-        console.log('Update successful:', response);
-      },
-      error: error => {
-        console.error('Update failed:', error);
-      }
-    });
-    this.selected='';
+  onInsertData(){
+    this.message='';
+    this.selected="insert";
 }
+onDeleteData(){
+  this.message='';
+  this.selected="delete";
+}
+onGetItem(){
+  this.message='';
+  this.selected="getItem";
+}
+
+  async updateData(inputData:ItemData) {
+    await this.apiService.updateItems(inputData);
+    this.selected='';
+    this.message='Updated successfully!';
+  }
+  async insertData(inputData:ItemData) {
+    await this.apiService.insertItems(inputData);
+    this.selected='';
+    this.message='Inserted successfully!';
+  }
+  async deleteData(inputData:number) {
+    await this.apiService.deleteItem(inputData);
+    this.selected='';
+    this.message='Deleted successfully!';
+  }
+  async getItem(inputData:number) {
+    this.itemData=await this.apiService.getItem(inputData);
+    console.log(this.itemData);
+    this.selected='doneGetItem';
+  }
+  /*
+  isAnyChildVisible(): boolean {
+    return  this.selected === 'doneGetItem'|| this.selected === 'fetch' || this.selected === 'update' || this.message !== '';
+  }*/
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ItemData } from '../item.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -13,6 +13,7 @@ import { SuccessMessageComponent } from "../success-message/success-message.comp
 })
 export class UpdateItemsComponent{
 @Output() update=new EventEmitter<ItemData>();
+@Input() buttonName!:string;
 itemData:ItemData={
   id:0,
   name:'',
@@ -21,27 +22,36 @@ itemData:ItemData={
   price:0
 };
 displayError=false;
-displaySuccess=false;
+checkUndefined(): boolean{
+  return this.itemData.name!='' && this.itemData.type!='' && this.itemData.quantity!=undefined && this.itemData.price!=undefined
+}
+
 onSubmit(){
+  this.displayError=false;
   console.log(this.itemData);
-  let allFieldsDefined = true;
-  for (let key in this.itemData) 
-    {
-      if((typeof key=='number' && key==0)||(typeof key=='string' && key==''))
+  if(this.buttonName=='Update')
+  {
+    if(this.checkUndefined() && this.itemData.id!=undefined )
       {
-        allFieldsDefined=false;
-        break;
+        this.update.emit(this.itemData);
       }
-    }
-  if(allFieldsDefined && this.itemData.id!=0)
-  {
-    this.displaySuccess=true;
-    this.update.emit(this.itemData);
+      else
+      {
+        this.displayError=true;
+      }
   }
-  else
+  else if(this.buttonName=='Insert')
   {
-    this.displayError=true;
+    if(this.checkUndefined())
+      {
+        this.update.emit(this.itemData);
+      }
+      else
+      {
+        this.displayError=true;
+      }
   }
+  
   }
         
 }

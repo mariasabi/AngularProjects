@@ -1,6 +1,6 @@
-<div class="form-items">
-    <form (ngSubmit)="onSubmit()">
-        <p>
+<div class="update-items">
+    <form class="form-items" (ngSubmit)="onSubmit()">
+        <p *ngIf="buttonName=='Update'">
           <label for="id">Id</label>
           <input type="number" id="id" name="id" [(ngModel)]="itemData.id" />
         </p>
@@ -24,9 +24,8 @@
           </p>
     
         <p class="actions">
-           <button type="submit">Update</button>
+           <button type="submit">{{buttonName}}</button>
         </p>
       </form>
-</div>
-<app-error-message *ngIf="displayError" [message]="'Please enter all the fields!'"/>
-<app-success-message *ngIf="displaySuccess" [message]="'Please enter all the fields!'"/>
+      <app-error-message *ngIf="displayError" [message]="'Please enter all fields!'"/>
+    </div>

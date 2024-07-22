@@ -5,15 +5,26 @@
 </header>
 <div class="operations">
     <button (click)="fetchData()">Get Items</button>
-    <button (click)="fetchData()">Insert Item</button>
+    <button (click)="onInsertData()">Insert Item</button>
     <button (click)="fetchData()">Bulk Insert Items</button>
     <button (click)="onUpdateData()">Update Item</button>
-    <button (click)="fetchData()">Delete Item</button>
-    
+    <button (click)="onDeleteData()">Delete Item</button>
+    <button (click)="onGetItem()">Get Item</button>
 </div>
+
 
 <div class="item-grid">
-<app-grid-items *ngIf="selected=='fetch'" [itemData]="itemData"></app-grid-items>
-<app-update-items *ngIf="selected=='update'" (update)="updateData($event)"/>
-
+    <app-grid-items *ngIf="selected === 'fetch'" [itemData]="itemData"></app-grid-items>
+    <div class="form-grid">
+        <app-update-items *ngIf="selected === 'update'"  [buttonName]="'Update'"  (update)="updateData($event)"></app-update-items>
+        <app-update-items *ngIf="selected === 'insert'" [buttonName]="'Insert'" (update)="insertData($event)"></app-update-items>
+        <app-delete-item *ngIf="selected === 'delete'" [buttonName]="'Delete'" (delete)="deleteData($event)"></app-delete-item>
+        <app-delete-item *ngIf="selected === 'getItem'" [buttonName]="'Get Item'" (delete)="getItem($event)"></app-delete-item>
+    </div>
+    <div *ngIf="selected==='doneGetItem'" class="get-item">
+        <p>{{itemData | json}}</p>
+    </div>
+    
+    <app-success-message *ngIf="message !== ''" [message]="message"></app-success-message>
 </div>
+  

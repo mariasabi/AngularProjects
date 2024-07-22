@@ -13,7 +13,7 @@ import { ColDef } from 'ag-grid-community';
   styleUrl: './grid-items.component.css'
 })
 export class GridItemsComponent implements OnChanges{
-  @Input({required:true}) itemData!: any[];
+  @Input({required:true}) itemData!: ItemData[];
   colDefs: ColDef[] = [];
 
   ngOnChanges(changes: SimpleChanges) {

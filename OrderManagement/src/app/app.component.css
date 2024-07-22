@@ -48,5 +48,26 @@ padding:0.4rem;
 
 .item-grid{
     margin: 2rem;
+    padding: 1rem;
 }
 
+.form-grid{
+display: flex;
+justify-content: center;
+}
+.get-item {
+    background-color: #433352;
+    color: white;
+    font-size: medium;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .get-item pre {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    white-space: pre-wrap;
+  }

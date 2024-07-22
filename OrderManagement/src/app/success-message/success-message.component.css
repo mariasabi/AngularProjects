@@ -1,0 +1,8 @@
+.success{
+    font-size:small;
+    font: inherit;
+    display: flex;
+    justify-content: center;
+    color:#433352;
+    background-color:#EECEB9 ;
+}
