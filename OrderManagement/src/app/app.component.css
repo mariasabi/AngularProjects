@@ -4,21 +4,24 @@ header{
     background-color: #433352;
     color: white;
     align-items: center;
+   
+
 }
 header h1{
     padding: 0.4rem;
+    font-weight:500;
 }
 header h3{
 margin-top: auto;
 margin-left: auto;
 padding:0.4rem;
+font-weight:500;
 }
 
 .operations{
     display: flex;
     flex-wrap: wrap;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    margin-top: 1rem;
 
 
 }
@@ -28,7 +31,7 @@ padding:0.4rem;
     align-items: center;
     gap: 0.5rem;
     padding: 0.35rem 0.5rem;
-    background-color: #987D9A;
+    background-color: #69506b;
     color: white;
     border: none;
     font: inherit;
@@ -47,23 +50,25 @@ padding:0.4rem;
 }
 
 .item-grid{
-    margin: 2rem;
+    margin: 1rem;
     padding: 1rem;
 }
 
 .form-grid{
 display: flex;
 justify-content: center;
+align-content: center;
 }
 .get-item {
     background-color: #433352;
     color: white;
     font-size: medium;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    text-align: center;
+    display: inline-block;
+    flex-direction: column;
+    align-content: center;
+    margin: 2rem;
+    padding:1rem;
+    text-align: left;
   }
   
   .get-item pre {

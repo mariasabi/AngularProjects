@@ -1,13 +1,16 @@
 
 .ag-theme-alpine {
   height:35rem;  
-    --ag-background-color: #f8f9fa;
-    --ag-header-background-color: #EECEB9;
-    --ag-row-hover-color: #BB9AB1;
-    --ag-header-foreground-color:black;
+  padding:1rem;
+    --ag-background-color: #1e1a1d;
+    --ag-header-background-color: #1e1a1d;
+    --ag-data-color:#e9e0e4;
+    
+    --ag-row-hover-color: #6d5b68;
+    --ag-header-foreground-color:#e9e0e4;
     --ag-selected-row-background-color: #007bff;
-    --ag-odd-row-background-color: white;
-    --ag-even-row-background-color: #FEFBD8;
+    --ag-odd-row-background-color: #1e1a1d;
+    --ag-even-row-background-color: #6d5b68;
   }
   
   .ag-header-cell {
@@ -17,17 +20,24 @@
   
   .ag-row:hover {
     background-color: var(--ag-row-hover-color) !important;
+    
   }
   
   .ag-row-even {
     background-color: var(--ag-even-row-background-color) !important;
+    color: #e9e0e4  !important;
   }
   
   .ag-row-odd {
     background-color: var(--ag-odd-row-background-color) !important;
+    color: #e9e0e4  !important;
   }
   
   .ag-row-selected {
     background-color: var(--ag-selected-row-background-color) !important;
     color: #ffffff !important;
+  }
+  .ag-row{
+    color: var(--ag-data-color);
+    
   }

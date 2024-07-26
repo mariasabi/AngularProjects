@@ -3,6 +3,8 @@
     padding:1rem;
     background-color: #433352;
     display: inline-block; 
+    border-radius: 8px;
+
 }
 
 .form-items{
@@ -20,7 +22,7 @@
     gap: 0.2rem; /* Space between label and input */
   }
   .form-items label {
-    font-weight: bold;
+    font-weight: 500;
     margin-bottom: 5px; /* Space between label and input */
   }
 
@@ -41,10 +43,11 @@
   .actions button {
     padding: 10px 20px;
     background-color:#EECEB9 ; /* Primary button color */
-    color: black;
+    color: #433352;
+
     border: none;
     font: inherit;
-    font-weight: bold;
+    font-weight: 500;
     font-size: medium;
     border-radius: 4px;
     cursor: pointer;
