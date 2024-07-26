@@ -14,19 +14,8 @@ export class AppComponent{
   itemEntries:any;
   selected?:string;
  message:string='';
- response!:{dbPath:''}
+ response!:any;
  
-  async fetchData() {
-    this.message='';
-    this.itemData=await this.apiService.getItems();
-    console.log(this.itemData);
-    this.selected='fetch';
-  }
-  async pageData() {
-    this.message='';
-    this.selected='page';
-  }
-
   onUpdateData(){
       this.message='';
       this.selected="update";
@@ -47,6 +36,17 @@ onBulkInsert(){
   this.message='';
   this.selected="upload";
 }
+
+async fetchData() {
+  this.message='';
+  this.itemData=await this.apiService.getItems();
+  console.log(this.itemData);
+  this.selected='fetch';
+}
+async pageData() {
+  this.message='';
+  this.selected='page';
+}
   async updateData(inputData:ItemData) {
    try{ 
     await this.apiService.updateItems(inputData);
@@ -56,6 +56,7 @@ onBulkInsert(){
     catch(error)
     {
       console.error('Error from server: ',error);
+      this.selected='';
       this.message='Update failed.';
     }
   }
@@ -65,15 +66,29 @@ onBulkInsert(){
     this.message='Inserted successfully!';
   }
   async deleteData(inputData:number) {
+    try{
     await this.apiService.deleteItem(inputData);
     this.selected='';
     this.message='Deleted successfully!';
+    }
+    catch(error){
+      console.error('Error from server: ',error);
+      this.selected='';
+      this.message='Delete failed.';
+    }
   }
   async getItem(inputData:number) {
+    try{
     this.itemData=await this.apiService.getItem(inputData);
     console.log(this.itemData);
     this.formatItemData();
     this.selected='doneGetItem';
+    }
+    catch(error)
+    {
+      this.selected='';
+      this.message="Item does not exist!";
+    }
   }
   formatItemData() {
     this.itemEntries = Object.entries(this.itemData);
@@ -83,8 +98,4 @@ public uploadFinished=(event:any)=>{
   console.log(this.response);
 }
 
-  /*
-  isAnyChildVisible(): boolean {
-    return  t his.selected === 'doneGetItem'|| this.selected === 'fetch' || this.selected === 'update' || this.message !== '';
-  }*/
 }

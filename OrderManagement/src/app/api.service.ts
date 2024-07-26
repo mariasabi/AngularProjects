@@ -21,54 +21,26 @@ async getItems(): Promise<any> {
 }
 
 async updateItems(inputData:ItemData){
-    const headers=new HttpHeaders({
-        'Content-Type':'application/json'
-      })
-     await this.http.put<ItemData>('https://localhost:7196/api/DynamicOrder/updateItemDynamic',inputData, { headers }).subscribe({
-        next: response => {
-          console.log('Update successful:', response);
-        },
-        error: error => {
-         // throwError(()=>new Error(error.message));
-          console.error('Update failed:', error);
-        }
-      });
-}
-/*
-async updateItems(inputData:ItemData){
   const headers=new HttpHeaders({
       'Content-Type':'application/json'
     })
-    
-   await this.http.put<ItemData>('https://localhost:7196/api/DynamicOrder/updateItemDynamic',inputData, { headers })
-   .pipe(catchError((error:HttpErrorResponse)=>{
-    return throwError(()=>new Error(error.message));
-   }))
-      
+     const response=await this.http.put<ItemData>('https://localhost:7196/api/DynamicOrder/updateItemDynamic',inputData, { headers }).toPromise();
+     return response;  
 }
-*/
+
 async deleteItem(inputData:number){
-    const headers=new HttpHeaders({
-        'Content-Type':'application/json'
-      })
-      await this.http.delete<number>(`https://localhost:7196/api/Order/deleteItem?id=${inputData}`, { headers }).subscribe({
-        next: response => {
-          console.log('Delete successful:', response);
-        },
-        error: error => {
-          console.error('Delete failed:', error);
-        }
-      });
+  const headers=new HttpHeaders({
+      'Content-Type':'application/json'
+    })
+    const response=await this.http.delete<number>(`https://localhost:7196/api/Order/deleteItem?id=${inputData}`, { headers }).toPromise();
+    return response;
 }
 async getItem(inputData:number): Promise<any> {
-    try {
+    
         const data = await this.http.get(`https://localhost:7196/api/Order/getItem?id=${inputData}`).toPromise();
         console.log(data);
         return data;
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
+    
 }
 
 async getPageItem(page: number, pageSize: number): Promise<any> {
@@ -86,18 +58,11 @@ async insertItems(inputData:ItemData){
     const headers=new HttpHeaders({
         'Content-Type':'application/json'
       })
-      await this.http.post<ItemData>('https://localhost:7196/api/Order/addItem',inputData, { headers }).subscribe({
-        next: response => {
-          console.log('Insert successful:', response);
-        },
-        error: error => {
-          console.error('Insert failed:', error);
-        }
-      });
+      const response=await this.http.post<ItemData>('https://localhost:7196/api/Order/addItem',inputData, { headers }).toPromise();
+      return response;
 }
 
  async bulkInsert(formData: FormData){
- // this.http.post('https://localhost:7196/api/DynamicOrder/bulkaddItemsDynamic',formData,{responseType:'text',reportProgress:true,observe:'events'})
   
   try {
     const response = await this.http.post<any>('https://localhost:7196/api/DynamicOrder/bulkaddItemsDynamic', formData, {
