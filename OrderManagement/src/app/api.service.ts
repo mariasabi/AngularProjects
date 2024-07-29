@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { ItemData } from "./item.model";
 import { Form } from "@angular/forms";
-import { catchError, throwError } from "rxjs";
+import { catchError, Observable, throwError } from "rxjs";
+import { User } from "./auth/user.model";
 
 @Injectable({providedIn:'root'})
 export class ApiService{
@@ -18,6 +19,16 @@ async getItems(): Promise<any> {
         console.error(error);
         throw error;
     }
+}
+public loginUser(user:User):Observable<string>{
+return this.http.post('https://localhost:7196/api/User/login',user,
+  {responseType:'text'}
+);
+}
+public registerUser(user:User):Observable<string>{
+  return this.http.post('https://localhost:7196/api/User/register',user,
+    {responseType:'text',}
+  );
 }
 
 async updateItems(inputData:ItemData){

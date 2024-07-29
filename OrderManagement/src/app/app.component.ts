@@ -15,7 +15,6 @@ export class AppComponent{
   selected?:string;
  message:string='';
  response!:any;
- 
   onUpdateData(){
       this.message='';
       this.selected="update";
@@ -87,7 +86,7 @@ async pageData() {
     catch(error)
     {
       this.selected='';
-      this.message="Item does not exist!";
+      this.message="Item cannot be retrieved!";
     }
   }
   formatItemData() {

@@ -62,10 +62,10 @@ async loadData() {
   try {
     const pageIndex=this.paginator.pageIndex;
     const pageSize=this.paginator.pageSize;
-    this.itemData = await this.getTableData(pageIndex+1,pageSize);
-    console.log(this.itemData);
+    this.itemData = await this.getTableData(pageIndex,pageSize);
+   // console.log(this.itemData);
     this.dataSource.data = this.itemData;
-    console.log(this.dataSource);
+    //console.log(this.dataSource);
    } 
    catch (error) {
     console.error(error);

@@ -1,0 +1,24 @@
+<div class="auth">
+    <form class="auth-form" (ngSubmit)="onSubmit()">
+
+        <p>
+          <label for="name">Username</label>
+          <input type="text" id="name" name="name" [(ngModel)]="user.username"/>
+        </p>
+    
+        <p *ngIf="buttonName=='Register'">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" [(ngModel)]="user.email" />
+          </p>
+      
+        <p>
+          <label for="password">Password</label>
+          <input type="text" id="password" name="password" [(ngModel)]="user.password"/>
+        </p>
+ 
+        <p class="actions">
+           <button type="submit">{{buttonName}}</button>
+        </p>
+      </form>
+      <!-- <app-error-message *ngIf="displayError" [message]="'Please enter all fields!'"/> -->
+    </div>
