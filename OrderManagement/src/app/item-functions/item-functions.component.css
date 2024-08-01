@@ -4,7 +4,7 @@ header{
     background-color: #433352;
     color: white;
     align-items: center;
-
+    padding: 1rem;
 }
 header h1{
     padding: 0.4rem;
@@ -22,9 +22,17 @@ background-color: #EECEB9;
 color: #433352;
 cursor: pointer;
 font-family: Georgia, 'Times New Roman', Times, serif;
-padding: 0.35rem;
-margin-left: 1rem;
+padding: 0.5rem;
+margin-left: 2rem;
+font-size: medium;
 }
+header button:hover,
+header button:active,
+.active {
+  background-color: #69506b;
+  color: white;
+}
+
 
 .operations{
     display: flex;
