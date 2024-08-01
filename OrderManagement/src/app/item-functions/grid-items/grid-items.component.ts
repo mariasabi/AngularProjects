@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import {AgGridAngular}  from 'ag-grid-angular';
-import { ItemData } from '../item.model';
+import { ItemData } from '../../item.model';
 import { ColDef } from 'ag-grid-community';
 
 

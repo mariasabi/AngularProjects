@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ErrorMessageComponent } from '../error-message/error-message.component';
-import { ItemData } from '../item.model';
-import { CommonModule } from '@angular/common';
+import { ErrorMessageComponent } from '../../error-message/error-message.component';
+import { ItemData } from '../../item.model';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-delete-item',
   standalone: true,

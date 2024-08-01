@@ -1,16 +1,16 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import { ItemData } from '../item.model';
+import { ItemData } from '../../item.model';
 import { MatTableDataSource,MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ApiService } from '../api.service';
+import { ApiService } from '../../api.service';
+
 
 
 @Component({
   selector: 'app-page-items',
   standalone: true,
-  imports: [MatPaginatorModule,MatTableModule,CommonModule,BrowserAnimationsModule],
+  imports: [MatPaginatorModule,MatTableModule,CommonModule],
   templateUrl: './page-items.component.html',
   styleUrl: './page-items.component.css',
 })
@@ -59,10 +59,10 @@ ngAfterViewInit() {
 }
 
 async loadData() {
-  try {
+  try {  
     const pageIndex=this.paginator.pageIndex;
     const pageSize=this.paginator.pageSize;
-    this.itemData = await this.getTableData(pageIndex,pageSize);
+    this.itemData = await this.getTableData(pageIndex+1,pageSize);
    // console.log(this.itemData);
     this.dataSource.data = this.itemData;
     //console.log(this.dataSource);

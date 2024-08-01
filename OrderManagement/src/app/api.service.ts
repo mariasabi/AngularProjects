@@ -30,6 +30,11 @@ public registerUser(user:User):Observable<string>{
     {responseType:'text',}
   );
 }
+public resetUser(user:any):Observable<string>{
+  return this.http.put('https://localhost:7196/api/User/resetPassword',user,
+    {responseType:'text',}
+  );
+}
 
 async updateItems(inputData:ItemData){
   const headers=new HttpHeaders({

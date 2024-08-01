@@ -1,10 +1,10 @@
 .update-items{
     color: white;
     padding:1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #433352;
     display: inline-block; 
+    border-radius: 8px;
+
 }
 
 .form-items{
@@ -22,12 +22,13 @@
     gap: 0.2rem; /* Space between label and input */
   }
   .form-items label {
-    font-weight:500;
+    font-weight: 500;
     margin-bottom: 5px; /* Space between label and input */
   }
 
   .form-items input {
-    width: 100%;
+    width: 220px;
+    
     max-width: 20rem; /* Optional: max width for inputs */
     padding: 0.5rem;
     border: 1px solid #ccc;
@@ -44,10 +45,10 @@
     padding: 10px 20px;
     background-color:#EECEB9 ; /* Primary button color */
     color: #433352;
+
     border: none;
     font: inherit;
-    font-weight:500;
-  
+    font-weight: 500;
     font-size: medium;
     border-radius: 4px;
     cursor: pointer;
