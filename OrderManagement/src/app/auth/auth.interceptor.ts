@@ -10,15 +10,6 @@ intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> 
             setHeaders:{Authorization:`Bearer ${token}`},
         })
         return next.handle(newCloneReq);
-    /*
-    return next.handle(newCloneReq).pipe(
-        catchError((error: HttpErrorResponse) => {
-            if (error.status === 401) {
-              // Redirect to home URL on 401 Unauthorized error
-              alert('Unauthorised access');
-            }
-            return throwError(error);
-          })
-        );*/
+    
 }
 }

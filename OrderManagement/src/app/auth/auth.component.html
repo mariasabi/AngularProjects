@@ -30,12 +30,11 @@
         <button type="button" (click)="back()">Back to Login</button>
      </p>
       </form>
-        <app-error-message *ngIf="showMessage" [message]="message"/>
+        <app-error-message *ngIf="message!=''" [message]="message"/>
     </div>
 
 <div class="auth" *ngIf="buttonName=='Reset password'">
       <form class="auth-form" (ngSubmit)="onReset()">
-  
           <p>
             <label for="name">Username</label>
             <input type="text" id="name" name="name" [(ngModel)]="resetUser.username"/>
@@ -58,7 +57,7 @@
           <button type="button" (click)="back()">Back to Login</button>
        </p>
         </form>
-        <app-error-message *ngIf="showMessage" [message]="message"/> 
+        <app-error-message *ngIf="message!=''" [message]="message"/> 
       </div>
 
 </div>

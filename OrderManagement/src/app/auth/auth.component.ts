@@ -19,7 +19,7 @@ constructor(private http:HttpClient,private apiService:ApiService,private router
 }
 buttonName:string='Login';
 isSignup:boolean=false;
-showMessage:boolean=false;
+//showMessage:boolean=false;
 message:string='';
 user:User={
   username:'',
@@ -31,8 +31,6 @@ resetUser={
   oldpassword:'',
   newpassword:''
 }
-
-
 
 onSubmit()
 {
@@ -47,21 +45,20 @@ onReset()
 {
   if(this.resetUser.username==''||this.resetUser.oldpassword==''||this.resetUser.newpassword=='')
     {
-      this.showMessage=true;
+      //this.showMessage=true;
       this.message="Some fields are empty";
     }
   else
   {
   this.apiService.resetUser(this.resetUser).subscribe((res)=>
-    {
-     
-      this.showMessage=true;
+    {     
+     // this.showMessage=true;
       this.message='Reset successful';
     },
     (error:any)=>
     {
       console.error('Reset failed:', error);
-      this.showMessage=true;
+      //this.showMessage=true;
       this.message=error.error;
     });
   }
@@ -72,7 +69,7 @@ public login(user:User)
   console.log(user);
   if(user.username==''||user.password=='')
   {
-    this.showMessage=true;
+    //this.showMessage=true;
     this.message="Some fields are empty";
   }
   else
@@ -86,7 +83,7 @@ public login(user:User)
     (error: any) => {
        
       console.error('Login failed:', error);
-      this.showMessage=true;
+     // this.showMessage=true;
     
       this.message=error.error;
     }
@@ -111,7 +108,7 @@ public register(user:User)
 {
   if(user.email==''||user.username==''||user.password=='')
     {
-      this.showMessage=true;
+     // this.showMessage=true;
       this.message="Some fields are empty";
     }
   else
@@ -124,11 +121,9 @@ public register(user:User)
   (error:any)=>
   {
     console.error('Register failed:', error);
-    this.showMessage=true;
+    //this.showMessage=true;
     this.message=error.error;
   });
 }
 }
-
-
 }

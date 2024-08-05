@@ -1,7 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { delay, of, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +12,9 @@ decodedToken!:any;
 expirationDate!:any;
 isExpired!:any;
 username!:any;
-tokenSubscription = new Subscription();
 
 constructor(private router:Router){};
-  // Method to decode the JWT token
+
   decodeToken(tkn: string): any {
     
     this.helper = new JwtHelperService();
@@ -26,8 +24,9 @@ constructor(private router:Router){};
 //console.log(this.decodedToken);
       this.expirationDate = this.helper.getTokenExpirationDate(tkn).valueOf() - new Date().valueOf();
       this.isExpired = this.helper.isTokenExpired(tkn);
-      this.username = this.decodedToken ? this.decodedToken.username : null; // Access the username from the decoded token
-      this.expirationCounter(this.expirationDate);
+
+    this.username=this.decodedToken.username;  
+    this.expirationCounter(this.expirationDate);
       // console.log('Username:', this.username);
       return this.username;
       }
@@ -41,7 +40,7 @@ constructor(private router:Router){};
     
     logout() {
       localStorage.removeItem('authToken');
-    this.router.navigate(['/login']); // Redirect to login page
+    this.router.navigate(['/login']); 
     console.log('User logged out');
     }
     isLoggedIn(): boolean {
