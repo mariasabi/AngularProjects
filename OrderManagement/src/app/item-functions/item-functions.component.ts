@@ -22,18 +22,21 @@ import { Router } from '@angular/router';
 })
 export class ItemFunctionsComponent {
     constructor(private router:Router,private apiService:ApiService,private jwtService:JwtService){}
-    title = 'Order Management Application';
+    title = $localize`Order Management Application`;
     itemData:any;
     itemEntries:any;
     selected?:string;
    message:string='';
    response!:any;
    username!:any;
+   isAdmin!:boolean;
+   buttonName!:string;
    ngOnInit(): void {
     const token = localStorage.getItem('authToken');  // Method to get the token, e.g., from localStorage
     if(token!=null)
     {
     this.username = this.jwtService.decodeToken(token);
+    this.isAdmin=this.jwtService.isAdmin();
     }
     else{
       this.username='User';
@@ -45,18 +48,22 @@ this.jwtService.logout();
     onUpdateData(){
         this.message='';
         this.selected="update";
+        this.buttonName=$localize`Update`;
     }
     onInsertData(){
       this.message='';
       this.selected="insert";
+      this.buttonName=$localize`Insert`;
   }
   onDeleteData(){
     this.message='';
     this.selected="delete";
+    this.buttonName=$localize`Delete`;
   }
   onGetItem(){
     this.message='';
     this.selected="getItem";
+    this.buttonName=$localize`Get Item`;
   }
   onBulkInsert(){
     this.message='';
@@ -77,30 +84,36 @@ this.jwtService.logout();
      try{ 
       await this.apiService.updateItems(inputData);
       this.selected='';
-      this.message='Updated successfully!';
+      this.message=$localize`Updated successfully!`;
      }
       catch(error:any)
       {
         console.error('Error from server: ',error);
         this.selected='';
-        this.message=error.error;
+        if(error.status==404)
+        this.message=$localize`No such item exists`;
+        else
+        this.message=$localize`Unknown error`;
       }
     }
     async insertData(inputData:ItemData) {
       await this.apiService.insertItems(inputData);
       this.selected='';
-      this.message='Inserted successfully!';
+      this.message=$localize`Inserted successfully!`;
     }
     async deleteData(inputData:number) {
       try{
       await this.apiService.deleteItem(inputData);
       this.selected='';
-      this.message='Deleted successfully!';
+      this.message=$localize`Deleted successfully!`;
       }
       catch(error:any){
         console.error('Error from server: ',error);
         this.selected='';
-        this.message=error.error;
+        if(error.status==404)
+        this.message=$localize`No such item exists`;
+        else
+        this.message=$localize`Unknown error`;
       }
     }
     async getItem(inputData:number) {
@@ -114,7 +127,10 @@ this.jwtService.logout();
       {
         console.log(error);
         this.selected='';
-        this.message=error.error;
+        if(error.status==404)
+        this.message=$localize`No such item exists`;
+        else
+        this.message=$localize`Unknown error`;
       }
     }
     formatItemData() {

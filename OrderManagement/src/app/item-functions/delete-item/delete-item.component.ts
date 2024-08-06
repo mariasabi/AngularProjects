@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class DeleteItemComponent {
 @Output() delete=new EventEmitter<number>();
 @Input() buttonName!:string;
+message!:string;
 displayError:boolean=false;
 id:number=0;
 onSubmit(){
@@ -23,6 +24,7 @@ onSubmit(){
     else
     {
       this.displayError=true;
+      this.message=$localize`Please enter Id!`
     }
 }
 }

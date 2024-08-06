@@ -14,6 +14,7 @@ import { SuccessMessageComponent } from "../../success-message/success-message.c
 export class UpdateItemsComponent{
 @Output() update=new EventEmitter<ItemData>();
 @Input() buttonName!:string;
+message!:string;
 itemData:ItemData={
   id:0,
   name:'',
@@ -38,6 +39,7 @@ onSubmit(){
       else
       {
         this.displayError=true;
+        this.message="Please enter all fields!";
       }
   }
   else if(this.buttonName=='Insert')
@@ -49,6 +51,7 @@ onSubmit(){
       else
       {
         this.displayError=true;
+        this.message="Please enter all fields!";
       }
   }
   

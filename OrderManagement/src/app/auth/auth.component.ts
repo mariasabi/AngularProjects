@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, LOCALE_ID, OnInit } from '@angular/core';
 import {User } from './user.model';
 import { ApiService } from '../api.service';
 import { CommonModule } from '@angular/common';
@@ -15,12 +15,13 @@ import { ErrorMessageComponent } from "../error-message/error-message.component"
   styleUrl: './auth.component.css'
 })
 export class AuthComponent{
-constructor(private http:HttpClient,private apiService:ApiService,private router:Router){
+constructor(@Inject(LOCALE_ID) public locale: string,private http:HttpClient,private apiService:ApiService,private router:Router){
 }
 buttonName:string='Login';
+displayButton:string=$localize`Login`;
 isSignup:boolean=false;
 //showMessage:boolean=false;
-message:string='';
+message:string=``;
 user:User={
   username:'',
   email:'',
@@ -46,20 +47,23 @@ onReset()
   if(this.resetUser.username==''||this.resetUser.oldpassword==''||this.resetUser.newpassword=='')
     {
       //this.showMessage=true;
-      this.message="Some fields are empty";
+      this.message=$localize`Some fields are empty`;
     }
   else
   {
   this.apiService.resetUser(this.resetUser).subscribe((res)=>
     {     
      // this.showMessage=true;
-      this.message='Reset successful';
+      this.message=$localize`Reset successful`;
     },
     (error:any)=>
     {
       console.error('Reset failed:', error);
       //this.showMessage=true;
-      this.message=error.error;
+      if(error.status==400)
+      this.message=$localize`Username or old password is not valid.`;
+      else
+      this.message=$localize`Unknown error`;
     });
   }
 }
@@ -70,7 +74,7 @@ public login(user:User)
   if(user.username==''||user.password=='')
   {
     //this.showMessage=true;
-    this.message="Some fields are empty";
+    this.message=$localize`Some fields are empty`;
   }
   else
   {
@@ -84,8 +88,10 @@ public login(user:User)
        
       console.error('Login failed:', error);
      // this.showMessage=true;
-    
-      this.message=error.error;
+     if(error.status==400)
+      this.message=$localize`Login failed`;
+    else
+      this.message=$localize`Unknown error`;
     }
   );
   }
@@ -93,36 +99,42 @@ public login(user:User)
 signup()
 {
   this.message='';
-  this.buttonName="Register";
+  this.buttonName=`Register`;
+  this.displayButton=$localize`Register`;
 }
 back()
 {
   this.message='';
-  this.buttonName="Login";
+  this.buttonName=`Login`;
+  this.displayButton=$localize`Login`;
 }
 forgotPassword(){
   this.message='';
-  this.buttonName="Reset password";
+  this.buttonName=`Reset password`;
+  this.displayButton=$localize`Reset password`;
 }
 public register(user:User)
 {
   if(user.email==''||user.username==''||user.password=='')
     {
      // this.showMessage=true;
-      this.message="Some fields are empty";
+      this.message=$localize`Some fields are empty`;
     }
   else
   {
   this.apiService.registerUser(user).subscribe((res)=>
   {
-    this.message='Register successful';
+    this.message=$localize`Register successful`;
   
   },
   (error:any)=>
   {
     console.error('Register failed:', error);
     //this.showMessage=true;
-    this.message=error.error;
+    if(error.status==400)
+      this.message=$localize`Such a user already exists.`;
+    else
+      this.message=$localize`Unknown error`;
   });
 }
 }

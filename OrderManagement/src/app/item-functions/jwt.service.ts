@@ -46,6 +46,11 @@ constructor(private router:Router){};
     isLoggedIn(): boolean {
       return !!localStorage.getItem('authToken');
     }
+    isAdmin():boolean{
+      if(this.decodedToken.role=="Admin")
+        return true;
+      return false;
+    }
   
 
 }

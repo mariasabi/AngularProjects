@@ -1,7 +1,7 @@
 <div class="bulk-insert">
 <div class="choose-file">
     <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none">
-    <button type="button" class="upload-button" (click)="file.click()">Upload File</button>
+    <button type="button" class="upload-button" (click)="file.click()" i18n>Upload File</button>
 </div>
 <div class="upload-progress">
     <span class="upload" *ngIf="progress>0">

@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './upload.component.css'
 })
 export class UploadComponent {
-public message!:string;
+public message:string=$localize``;
 public progress!:number;
 @Output() public onUploadFinish= new EventEmitter();
 constructor(private http:HttpClient, private apiService:ApiService){}
@@ -27,12 +27,12 @@ try{
     this.progress=Math.round(100*event!.loaded/ event!.total!);
   }
   else if(event!.type===HttpEventType.Response){
-    this.message='Insert success.';
+    this.message=$localize`Insert success.`;
     this.onUploadFinish.emit(event!.body);
   }
 }
 catch(error){
-  this.message='Insert failed.';
+  this.message=$localize`Insert failed.`;
 }
 }
 }
