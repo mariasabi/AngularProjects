@@ -3,6 +3,7 @@ import { ErrorMessageComponent } from '../../error-message/error-message.compone
 import { ItemData } from '../../item.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import '@angular/localize/init'; 
 @Component({
   selector: 'app-delete-item',
   standalone: true,

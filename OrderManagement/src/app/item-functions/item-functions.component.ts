@@ -12,7 +12,7 @@ import { DeleteItemComponent } from "./delete-item/delete-item.component";
 import jwt_decode from 'jwt-decode';
 import { JwtService } from './jwt.service';
 import { Router } from '@angular/router';
-
+import '@angular/localize/init'; 
 @Component({
   selector: 'app-item-functions',
   standalone: true,

@@ -1,3 +1,4 @@
+
 <div class="main-auth">
 <div class="auth" *ngIf="buttonName!='Reset password'">
     <form  class="auth-form" (ngSubmit)="onSubmit()">
@@ -15,6 +16,11 @@
         <p>
           <label for="password" i18n>Password</label>
           <input type="password" id="password" name="password" [(ngModel)]="user.password"/>
+        </p>
+
+        <p *ngIf="buttonName=='Register'">
+          <label for="hindi" i18n>Hindi Name</label>
+          <input type="text" id="hindi" name="hindi" [(ngModel)]="user.hindiName" />
         </p>
  
         <p class="actions">

@@ -1,2 +1,9 @@
 <!-- <app-item-functions></app-item-functions> -->
- <router-outlet></router-outlet>
+<div>
+    <button (click)="switchLanguage('en')">English</button>
+    <button (click)="switchLanguage('hi')">Hindi</button>
+  </div>
+<main>
+    <router-outlet></router-outlet>
+
+</main>  

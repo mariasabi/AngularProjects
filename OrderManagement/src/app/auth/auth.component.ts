@@ -7,6 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { ErrorMessageComponent } from "../error-message/error-message.component";
+import { TranslateService } from '@ngx-translate/core';
+import '@angular/localize/init'; // Ensure this import is present
+
 @Component({
   selector: 'app-auth',
   standalone: true,
@@ -15,7 +18,8 @@ import { ErrorMessageComponent } from "../error-message/error-message.component"
   styleUrl: './auth.component.css'
 })
 export class AuthComponent{
-constructor(@Inject(LOCALE_ID) public locale: string,private http:HttpClient,private apiService:ApiService,private router:Router){
+constructor(private http:HttpClient,private apiService:ApiService,private router:Router){
+
 }
 buttonName:string='Login';
 displayButton:string=$localize`Login`;
@@ -25,13 +29,15 @@ message:string=``;
 user:User={
   username:'',
   email:'',
-  password:''
+  password:'',
+  hindiName:''
 };
 resetUser={
   username:'',
   oldpassword:'',
   newpassword:''
 }
+
 
 onSubmit()
 {
@@ -122,6 +128,7 @@ public register(user:User)
     }
   else
   {
+    console.log(user);
   this.apiService.registerUser(user).subscribe((res)=>
   {
     this.message=$localize`Register successful`;

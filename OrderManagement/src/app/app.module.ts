@@ -20,6 +20,9 @@ import { JwtService } from './item-functions/jwt.service';
 import { AuthGuard } from './auth/auth.guard';
 import { ReactiveFormsModule } from '@angular/forms';
 import {  provideAnimations } from '@angular/platform-browser/animations';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { XliffLoader} from './xliff-loader'; // Import the custom loader
+
 @NgModule({
 declarations:[AppComponent,
   
@@ -39,7 +42,15 @@ declarations:[AppComponent,
     RouterOutlet,
     RouterModule.forRoot(routes),
     AuthComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (http: HttpClient) => new XliffLoader(http),
+        deps: [HttpClient]
+      }
+    })
+
   
 ],
   bootstrap:[AppComponent],

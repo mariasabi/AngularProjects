@@ -5,8 +5,8 @@
   "projects": {
     "OrderManagement": {
       "i18n":{
-        "sourceLocale":"en-US",
-        "locales": {"hi-IN":"src/locale/messages.hi.xlf"}
+        "sourceLocale":"en",
+        "locales": {"hi":"src/assets/locale/messages.hi.xlf"}
       },
       "projectType": "application",
       "schematics": {},
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "localize":["hi-IN"],
+            "localize":["en-US","hi-IN"],
             "outputPath": "dist/order-management",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -27,7 +27,8 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
+              "src/assets",
+              { 
                 "glob": "**/*",
                 "input": "public"
               }
@@ -42,6 +43,8 @@
           },
           "configurations": {
             "production": {
+              "localize":["en","hi"],
+               "outputPath": "dist/OrderManagement",
               "budgets": [
                 {
                   "type": "initial",
@@ -56,6 +59,14 @@
               ],
               "outputHashing": "all"
             },
+            "en": {
+              "localize": ["en"],
+              "outputPath":"dist/OrderManagement/en"
+            },
+            "hi": {
+              "localize": ["hi"],
+              "outputPath":"dist/OrderManagement/hi"
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
@@ -67,11 +78,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
+            
             "production": {
               "buildTarget": "OrderManagement:build:production"
             },
             "development": {
               "buildTarget": "OrderManagement:build:development"
+            },
+            "en":{
+              "buildTarget": "OrderManagement:build:en"
+            },
+            "hi":{
+              "buildTarget": "OrderManagement:build:hi"
             }
           },
           "defaultConfiguration": "development"

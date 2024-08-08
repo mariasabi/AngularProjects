@@ -1,41 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="5248717555542428023" datatype="html">
         <source>Username</source>
-           <target>उपयोगकर्ता नाम</target>
+        <target>उपयोगकर्ता नाम</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.html</context>
-          <context context-type="linenumber">6,7</context>
+          <context context-type="linenumber">7,8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.html</context>
-          <context context-type="linenumber">39,40</context>
+          <context context-type="linenumber">45,46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4768749765465246664" datatype="html">
         <source>Email</source>
-         <target>ईमेल</target>
+        <target>ईमेल</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.html</context>
-          <context context-type="linenumber">11,12</context>
+          <context context-type="linenumber">12,13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1431416938026210429" datatype="html">
         <source>Password</source>
-         <target>पासवर्ड</target>
+        <target>पासवर्ड</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.html</context>
-          <context context-type="linenumber">16,17</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="259994233469382845" datatype="html">
+        <source>Hindi Name</source>
+        <target>हिंदी नाम</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/auth.component.html</context>
+          <context context-type="linenumber">22,23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1718412516080817357" datatype="html">
         <source>Click here to register</source>
-           <target>क्लिक करें यहाँ रजिस्टर करने के लिए.</target>
+          <target>क्लिक करें यहाँ रजिस्टर करने के लिए.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.html</context>
-          <context context-type="linenumber">24,25</context>
+          <context context-type="linenumber">30,31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8264044238565501678" datatype="html">
@@ -43,47 +51,47 @@
           <target>पासवर्ड भूल गए</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.html</context>
-          <context context-type="linenumber">27,28</context>
+          <context context-type="linenumber">33,34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="77685683276518709" datatype="html">
         <source>Back to Login</source>
-         <target>लॉगिन पर वापस जाएं</target>
+          <target>लॉगिन पर वापस जाएं</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.html</context>
-          <context context-type="linenumber">30,31</context>
+          <context context-type="linenumber">36,37</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.html</context>
-          <context context-type="linenumber">57,58</context>
+          <context context-type="linenumber">63,64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2397816345463091163" datatype="html">
         <source>Old Password</source>
-         <target>पुराना पासवर्ड</target>
+        <target>पुराना पासवर्ड</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.html</context>
-          <context context-type="linenumber">44,45</context>
+          <context context-type="linenumber">50,51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1221596867309460035" datatype="html">
         <source>New Password</source>
-         <target>नया पासवर्ड</target>
+        <target>नया पासवर्ड</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.html</context>
-          <context context-type="linenumber">48,49</context>
+          <context context-type="linenumber">54,55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2454050363478003966" datatype="html">
         <source>Login</source>
-         <target>लॉग इन करें</target>
+        <target>लॉग इन करें</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.ts</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.ts</context>
-          <context context-type="linenumber">109</context>
+          <context context-type="linenumber">115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="27804303672186292" datatype="html">
@@ -91,47 +99,48 @@
          <target>कुछ फ़ील्ड खाली हैं</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.ts</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">83</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.ts</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">127</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2774105565968392844" datatype="html">
         <source>Reset successful</source>
-        <target>रीसेट सफल</target>
+         <target>रीसेट सफल</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2259698025263957475" datatype="html">
         <source>Username or old password is not valid.</source>
-        <target>उपयोगकर्ता नाम या पुराना पासवर्ड मान्य नहीं है.</target>
+         <target>उपयोगकर्ता नाम या पुराना पासवर्ड मान्य नहीं है.</target>
+  
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2657043015926552641" datatype="html">
         <source>Unknown error</source>
-         <target>अज्ञात त्रुटि</target><target>अज्ञात त्रुटि</target>
+        <target>अज्ञात त्रुटि</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">72</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.ts</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="linenumber">100</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.ts</context>
-          <context context-type="linenumber">137</context>
+          <context context-type="linenumber">144</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/item-functions/item-functions.component.ts</context>
@@ -148,26 +157,26 @@
       </trans-unit>
       <trans-unit id="8053477814844632887" datatype="html">
         <source>Login failed</source>
-           <target>लॉगिन विफल</target>
+        <target>लॉगिन विफल</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.ts</context>
-          <context context-type="linenumber">92</context>
+          <context context-type="linenumber">98</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3301086086650990787" datatype="html">
         <source>Register</source>
-        <target>पंजीकरण करवाना</target>
+         <target>पंजीकरण करवाना</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.ts</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1636934520301910285" datatype="html">
         <source>Reset password</source>
-          <target>पासवर्ड रीसेट</target>
+         <target>पासवर्ड रीसेट</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.ts</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">120</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8389020822748342306" datatype="html">
@@ -175,18 +184,18 @@
         <target>पंजीकरण सफल</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.ts</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">134</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3861024617604239587" datatype="html">
         <source>Such a user already exists.</source>
-               <target>ऐसा उपयोगकर्ता पहले से मौजूद है</target>
+        <target>ऐसा उपयोगकर्ता पहले से मौजूद है</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/auth.component.ts</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">142</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7286430803380181008" datatype="html">
+  <trans-unit id="7286430803380181008" datatype="html">
         <source>Id</source>
           <target>पहचान</target>
         <context-group purpose="location">
