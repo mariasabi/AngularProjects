@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { ItemData } from '../item.model';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +11,9 @@ import { UpdateItemsComponent } from "./update-items/update-items.component";
 import { DeleteItemComponent } from "./delete-item/delete-item.component";
 import jwt_decode from 'jwt-decode';
 import { JwtService } from './jwt.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
+
 import '@angular/localize/init'; 
 @Component({
   selector: 'app-item-functions',
@@ -20,28 +22,34 @@ import '@angular/localize/init';
   templateUrl: './item-functions.component.html',
   styleUrl: './item-functions.component.css'
 })
-export class ItemFunctionsComponent {
-    constructor(private router:Router,private apiService:ApiService,private jwtService:JwtService){}
+export class ItemFunctionsComponent implements OnInit{
+  userName!: string;
+    constructor(private route:ActivatedRoute,private router:Router,private apiService:ApiService,private jwtService:JwtService){}
     title = $localize`Order Management Application`;
     itemData:any;
     itemEntries:any;
     selected?:string;
    message:string='';
    response!:any;
-   username!:any;
-   isAdmin!:boolean;
    buttonName!:string;
+
    ngOnInit(): void {
-    const token = localStorage.getItem('authToken');  // Method to get the token, e.g., from localStorage
-    if(token!=null)
-    {
-    this.username = this.jwtService.decodeToken(token);
-    this.isAdmin=this.jwtService.isAdmin();
-    }
-    else{
-      this.username='User';
-    }
+
+    // const navigation = this.router.getCurrentNavigation();
+    // const state = navigation?.extras.state as { userName:string};
+    // if (state && state.userName) {
+    //   this.userName = state.userName;
+    //   console.log('In admin', this.userName);
+    // } else {
+    //   console.log('No state passed');
+    // }
+
+    this.route.queryParams.subscribe(params => {
+       this.userName = params['name'];
+       console.log(this.userName);
+    });
    }
+
 logout(){
 this.jwtService.logout();
 }

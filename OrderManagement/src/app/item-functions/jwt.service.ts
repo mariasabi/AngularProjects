@@ -49,7 +49,7 @@ constructor(private router:Router){};
     isAdmin():boolean{
       if(this.decodedToken.role=="Admin")
         return true;
-      return false;
+      return false; 
     }
   
 

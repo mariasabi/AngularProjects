@@ -35,7 +35,9 @@ public resetUser(user:any):Observable<string>{
     {responseType:'text',}
   );
 }
-
+public getHindiName(username:string):Observable<string>{
+  return this.http.get(`https://localhost:7044/api/User/getHindiName?name=${username}`, {responseType:'text',});
+  }
 async updateItems(inputData:ItemData){
   const headers=new HttpHeaders({
       'Content-Type':'application/json'

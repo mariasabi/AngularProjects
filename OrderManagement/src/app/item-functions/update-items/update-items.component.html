@@ -12,7 +12,11 @@
     
         <p>
           <label for="type" i18n>Type</label>
-          <input type="text" id="type" name="type" [(ngModel)]="itemData.type"/>
+          <select id="type" [(ngModel)]="itemData.type">
+            <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+          </select>
+          
+          <!-- <input type="text" id="type" name="type" [(ngModel)]="itemData.type"/> -->
         </p>
         <p>
             <label for="quantity" i18n>Quantity</label>

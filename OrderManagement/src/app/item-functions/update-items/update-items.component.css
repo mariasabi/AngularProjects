@@ -27,7 +27,7 @@
     margin-bottom: 5px; /* Space between label and input */
   }
 
-  .form-items input {
+  .form-items input,select {
     width: 220px;
     
     max-width: 20rem; /* Optional: max width for inputs */

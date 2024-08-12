@@ -5,8 +5,8 @@
   "projects": {
     "OrderManagement": {
       "i18n":{
-        "sourceLocale":"en",
-        "locales": {"hi":"src/assets/locale/messages.hi.xlf"}
+        "sourceLocale":"en-US",
+        "locales": {"hi-IN":"src/assets/locale/messages.hi.xlf"}
       },
       "projectType": "application",
       "schematics": {},
@@ -43,13 +43,13 @@
           },
           "configurations": {
             "production": {
-              "localize":["en","hi"],
+              "localize":["en-US","hi-IN"],
                "outputPath": "dist/OrderManagement",
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "1.5MB",
+                  "maximumError": "2MB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -57,20 +57,24 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/"
             },
             "en": {
-              "localize": ["en"],
-              "outputPath":"dist/OrderManagement/en"
+              "localize": ["en-US"],
+              "outputPath":"dist/OrderManagement/en",
+              "baseHref": "/en/"
             },
             "hi": {
-              "localize": ["hi"],
-              "outputPath":"dist/OrderManagement/hi"
+              "localize": ["hi-IN"],
+              "outputPath":"dist/OrderManagement/hi",
+              "baseHref": "/hi/"
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "baseHref":"/"
             }
           },
           "defaultConfiguration": "production"

@@ -16,6 +16,8 @@ export class UpdateItemsComponent{
 @Output() update=new EventEmitter<ItemData>();
 @Input() buttonName!:string;
 message!:string;
+types: string[] = ['Snacks','Chocolates','Gum','Candy','Beverages','Stationery'];
+
 itemData:ItemData={
   id:0,
   name:'',
@@ -24,6 +26,9 @@ itemData:ItemData={
   price:0
 };
 displayError=false;
+constructor(){
+  this.itemData.type = this.types[0];
+}
 checkUndefined(): boolean{
   return this.itemData.name!='' && this.itemData.type!='' && this.itemData.quantity!=undefined && this.itemData.price!=undefined
 }
