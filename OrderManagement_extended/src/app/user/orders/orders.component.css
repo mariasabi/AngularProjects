@@ -1,0 +1,69 @@
+.order{
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    gap: 0.2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    justify-content: left;/* Spread out the content */
+    width: 100%; /* Make width responsive */
+    max-width: 100vw; /* Limit the max width */
+
+}
+.order p {
+   /*flex: 1 1 150px; *//* Flexibility for each paragraph to shrink/grow */
+    margin: 0;
+    flex:1 1 10rem;
+    width:10rem;
+  }
+.order p:last-child{
+
+    flex: 1 1 20rem; /* Override flex to fix the width of the last paragraph */
+    width: 20rem;    /* Set desired width */
+}
+.list-orders{
+    display: flex;
+    flex-direction: column;
+    margin:1rem;
+    gap: 1rem;
+}
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .order {
+      flex-direction: column; /* Stack items vertically on smaller screens */
+      padding: 10px;
+      width: 100%; 
+      max-width: 100%; /* Ensure it takes full width */
+    }
+  
+    .order p {
+      flex: none;
+      width: auto; /* Allow paragraphs to adjust width */
+      margin-bottom: 10px; /* Adds space between items */
+    }
+    .order p:last-child {
+      width: auto; /* Allow last paragraph to adjust width */
+  }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .list-orders {
+      margin: 0.5rem; /* Reduce margin on very small screens */
+    }
+  
+    .order {
+      padding: 10px;
+      gap: 0.5rem;
+    }
+  
+    .order p {
+      font-size: 14px; /* Adjust font size for smaller screens */
+      width: 100%;     /* Full width for paragraphs */
+  }
+
+  .order p:last-child {
+      font-size: 14px; /* Adjust font size for the last paragraph */
+      width: 100%;     /* Full width for last paragraph */
+  }
+  }

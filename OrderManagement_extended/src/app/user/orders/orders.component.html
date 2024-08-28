@@ -1,0 +1,9 @@
+<div *ngFor="let order of orders" class="list-orders">
+    <div class="order">
+      <p>OrderId: {{order.orderId}}</p>
+      <p>Name: {{order.itemname}}</p>
+      <p>Quantity: {{order.quantity}}</p>
+      <p>INR {{order.totalPrice}}</p>
+      <p>Ordered on: {{order.orderTime}}</p>
+    </div>
+</div>

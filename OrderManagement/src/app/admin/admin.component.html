@@ -10,19 +10,23 @@
     <button (click)="logout()" i18n>Logout</button>
 </header>
 <div class="operations">
-
     <button  (click)="fetchData()" i18n>Get Items</button>
     <button (click)="pageData()" i18n>Get Paginated Items</button>
     <button (click)="onGetItem()" i18n>Get Item</button>
     <button (click)="onInsertData()" i18n>Insert Item</button>
     <button (click)="onBulkInsert()" i18n>Bulk Insert Items</button>
     <button (click)="onUpdateData()" i18n>Update Item</button>
-    <button (click)="onDeleteData()" i18n>Delete Item</button>
-    
+      <button (click)="onDeleteData()" i18n>Delete Item</button>
 </div>
-
+<div class="operations">
+    <button  (click)="fetchUsers()" i18n>Get Users</button>
+    <button (click)="onGetUserByUsername()" i18n>Get User By Username</button>
+    <button (click)="onGetUserById()" i18n>Get User By Id</button>
+    <button (click)="onDeleteUser()" i18n>Delete User By Username</button>
+</div>
     <app-grid-items *ngIf="selected === 'fetch'" [itemData]="itemData"></app-grid-items>
     <app-page-items *ngIf="selected === 'page'"></app-page-items>
+    <app-grid-users *ngIf="selected === 'fetchUsers'" [userData]="userData"></app-grid-users>
 <div class="form-grid">
     <div class="item-grid">
         <app-upload *ngIf="selected==='upload'" (onUploadFinish)="uploadFinished($event)"></app-upload>
@@ -30,13 +34,21 @@
         <app-update-items *ngIf="selected === 'insert'" [buttonName]="buttonName" (update)="insertData($event)"></app-update-items>
         <app-delete-item *ngIf="selected === 'delete'" [buttonName]="buttonName" (delete)="deleteData($event)"></app-delete-item>
         <app-delete-item *ngIf="selected === 'getItem'" [buttonName]="buttonName" (delete)="getItem($event)"></app-delete-item>
+
+        <app-delete-user *ngIf="selected === 'getByUsername'" [buttonName]="buttonName" (delete)="getUserByName($event)"></app-delete-user>
+        <app-delete-user *ngIf="selected === 'getById'" [buttonName]="buttonName" (delete)="getUserById($event)"></app-delete-user>
+        <app-delete-user *ngIf="selected === 'deleteUser'" [buttonName]="buttonName" (delete)="deleteUser($event)"></app-delete-user>
     </div>
     <div *ngIf="selected==='doneGetItem'" class="get-item">
         <div *ngFor="let entry of itemEntries">
             <p>{{ entry[0] }}: {{ entry[1] }}</p>
         </div>
     </div>
-    
+    <div *ngIf="selected==='doneGetUser'" class="get-item">
+        <div *ngFor="let entry of userEntries">
+            <p>{{ entry[0] }}: {{ entry[1] }}</p>
+        </div>
+    </div>
     <app-success-message *ngIf="message !== ''" [message]="message"></app-success-message>
 </div>
   

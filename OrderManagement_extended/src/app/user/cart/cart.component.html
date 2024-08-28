@@ -1,0 +1,42 @@
+<div class="cart-popup">
+    <div class="cart-top">
+        <h2>Your Cart</h2>
+        <button (click)="closeCart()">
+        <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <div *ngIf="cartItems.length> 0" class="cart-items">
+      <div *ngFor="let cartItem of cartItems" class="cart-item">
+        <div class="cart-item-remove">
+          <button (click)="removeCartItem(cartItem)">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+            <div class="cart-item-description">
+              {{cartItem.itemName}}
+            </div>
+            <div class="cart-item-quantity">
+              <button (click)="reduceQuantity(cartItem)" class="minus-btn" type="button" name="button" >
+                <i class="fas fa-minus"></i> 
+              </button>
+              <input type="text" name="name" value={{cartItem.quantity}}>
+              <button (click)="increaseQuantity(cartItem)" class="plus-btn" type="button" name="button">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+            <div class="cart-item-price">INR {{ cartItem.price * cartItem.quantity }}</div>
+          </div>
+       
+      <div class="cart-value">
+        Total cart value: INR {{cartValue}}
+      </div>
+      <div class="purchase-button">
+        <button (click)="purchaseCart()">Purchase</button>
+      </div>
+    </div>
+    <div *ngIf="cartItems.length === 0">
+      <p>No items in the cart</p>
+    </div>
+  </div> 

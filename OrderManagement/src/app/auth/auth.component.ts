@@ -45,13 +45,12 @@ ngOnInit(): void {
   this.language = this.getLanguageFromWindow();
 }
 private getLanguageFromWindow(): string {
-  const path = window.location.pathname; // Full path like '/hi/home'
-  const segments = path.split('/');  // ['', 'hi', 'home']
-  return segments[1]; // The first segment should be the language code
+  const path = window.location.pathname; 
+  const segments = path.split('/'); 
+  return segments[1]; 
 }
 onSubmit()
 {
- 
   this.message='';
   if(this.buttonName=='Login')
     this.login(this.user);
@@ -104,7 +103,7 @@ public login(user:User)
         console.log('Login successful');
         console.log('Before navigation: ',this.username);
         if(this.isAdmin)
-          this.router.navigate(['/admin'],{ queryParams: {name: this.username }});
+          this.router.navigate(['/admin'],{ queryParams: {name: this.username }})   ;
         else
          this.router.navigate(['/user'],{ queryParams: {name: this.username }});         
       }); 
@@ -134,14 +133,14 @@ private getHindiName(): Promise<void> {
       },
       (error: any) => {
         console.error(error);
-        resolve();  // Proceed even if there's an error
+        resolve();  
       }
     );
   });
 }
 private async decodeToken():Promise<void>
 {
-  const token = localStorage.getItem('authToken');  // Method to get the token, e.g., from localStorage
+  const token = localStorage.getItem('authToken');  
 
   if(token!=null)
     {

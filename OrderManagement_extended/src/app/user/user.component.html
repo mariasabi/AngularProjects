@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<header>
+    <h1>{{title}}</h1>
+ <h3><span i18n>Welcome </span>{{userName}}</h3>
+ <button (click)="logout()" i18n>Logout</button>
+</header>
+<div class="main-box">
+  <div class="sidebar">
+      <button (click)="goHome()" i18n><i class="fas fa-home"></i> Home</button>
+      <button (click)="openCart()" i18n><i class="fas fa-shopping-cart"></i> Cart</button>
+      <button  (click)="fetchOrders()" i18n><i class="fas fa-box"></i> Orders</button>
+      <button (click)="viewProfile()" i18n> <i class="fas fa-user"></i> Profile</button>
+      
+  </div>
+  <div class="items-container" *ngIf="home">
+      <div *ngFor="let item of itemData" class="item-box">
+        <h3>{{ item.name }}</h3>
+        <p>Type: {{ item.type }}</p>
+        <p>Price: {{ item.price }}</p>
+        <img *ngIf="item.image" [src]="'data:image/jfif;base64,' + item.image" alt="{{ item.name }}" style="width: 150px; height: 150px;">
+        <button (click)="addToCart(item)" class="add-to-cart-btn">Add to Cart</button>
+      </div>
+  </div>
+  <app-orders *ngIf="ordersVisible"></app-orders>
+  <app-cart  *ngIf="cartVisible" [cartItems]="cartItems" [cartValue]="cartValue" (visible)="cartVisiblity()" (purchase)="showOrders()"></app-cart>
+</div>

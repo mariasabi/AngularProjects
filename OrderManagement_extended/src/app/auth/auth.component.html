@@ -1,0 +1,68 @@
+
+<div class="main-auth">
+<div class="auth" *ngIf="buttonName!='Reset password'">
+    <form  class="auth-form" (ngSubmit)="onSubmit()">
+
+        <p>
+          <label for="name" i18n>Username</label>
+          <input type="text" id="name" name="name" [(ngModel)]="user.username"/>
+        </p>
+    
+        <p *ngIf="buttonName=='Register'">
+            <label for="email" i18n>Email</label>
+            <input type="text" id="email" name="email" [(ngModel)]="user.email" />
+          </p>
+      
+        <p>
+          <label for="password" i18n>Password</label>
+          <input type="password" id="password" name="password" [(ngModel)]="user.password"/>
+        </p>
+
+        <p *ngIf="buttonName=='Register'">
+          <label for="hindi" i18n>Hindi Name</label>
+          <input type="text" id="hindi" name="hindi" [(ngModel)]="user.hindiName" />
+        </p>
+ 
+        <p class="actions">
+           <button type="submit" >{{displayButton}}</button>
+        </p>
+        <p class="actions" *ngIf="buttonName=='Login'">
+          <button type="button" (click)="signup()" i18n>Click here to register</button>
+       </p>
+       <p class="actions" *ngIf="buttonName=='Login'">
+        <button type="button" (click)="forgotPassword()" i18n>Forgot password</button>
+     </p>
+       <p class="actions" *ngIf="buttonName=='Register'">
+        <button type="button" (click)="back()" i18n>Back to Login</button>
+     </p>
+      </form>
+        <app-error-message *ngIf="message!=''" [message]="message"/>
+    </div>
+
+<div class="auth" *ngIf="buttonName=='Reset password'">
+      <form class="auth-form" (ngSubmit)="onReset()">
+          <p>
+            <label for="name" i18n>Username</label>
+            <input type="text" id="name" name="name" [(ngModel)]="resetUser.username"/>
+          </p>
+         
+          <p>
+            <label for="oldpassword" i18n>Old Password</label>
+            <input type="password" id="oldpassword" name="oldpassword" [(ngModel)]="resetUser.oldpassword"/>
+          </p>
+          <p>
+            <label for="newpassword" i18n>New Password</label>
+            <input type="password" id="newpassword" name="newpassword" [(ngModel)]="resetUser.newpassword"/>
+          </p>
+
+          <p class="actions">
+             <button type="submit">{{displayButton}}</button>
+          </p>
+      
+         <p class="actions">
+          <button type="button" (click)="back()" i18n>Back to Login</button>
+       </p>
+        </form>
+        <app-error-message *ngIf="message!=''" [message]="message"/> 
+      </div>
+</div>

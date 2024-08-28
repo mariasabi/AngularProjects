@@ -10,15 +10,20 @@ import { UpdateItemsComponent } from "../item-functions/update-items/update-item
 import { DeleteItemComponent } from "../item-functions/delete-item/delete-item.component";
 import { SuccessMessageComponent } from "../success-message/success-message.component";
 import { CommonModule } from '@angular/common';
+import { GridUsersComponent } from "./grid-users/grid-users.component";
+import { DeleteUserComponent } from "./delete-user/delete-user.component";
+import { UserData } from './user.model';
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [GridItemsComponent,CommonModule, PageItemsComponent, UploadComponent, UpdateItemsComponent, DeleteItemComponent, SuccessMessageComponent],
+  imports: [GridItemsComponent, CommonModule, PageItemsComponent, UploadComponent, UpdateItemsComponent, DeleteItemComponent, SuccessMessageComponent, GridUsersComponent, DeleteUserComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
 export class AdminComponent implements OnInit{
+  userData!:UserData[];
   language!: string;
+  userEntries:any;
   constructor(private route:ActivatedRoute,private router:Router,private apiService:ApiService,private jwtService:JwtService){}
   title = $localize`Order Management Application`;
   itemData:any;
@@ -27,17 +32,89 @@ export class AdminComponent implements OnInit{
  message:string='';
  response!:any;
 userName!:string;
-
-
- ngOnInit(): void {
+ngOnInit(): void {
   this.route.queryParams.subscribe(params => {
     this.userName = params['name'];
     console.log(this.userName);
  });
-  
  }
-
  buttonName!:string;
+ 
+onDeleteUser() {
+  this.message='';
+  this.selected="deleteUser";
+  this.buttonName=$localize`Delete User`;
+}
+onGetUserById() {
+  this.message='';
+  this.selected="getById";
+  this.buttonName=$localize`Get User By Id`;
+}
+onGetUserByUsername() {
+ this.message='';
+ this.selected="getByUsername";
+ this.buttonName=$localize`Get User By Username`;
+}
+  async fetchUsers() {
+  this.message='';
+  this.userData=await this.apiService.getUsers();
+  console.log(this.userData);
+  this.selected='fetchUsers';
+}
+async deleteUser(inputData:string) {
+  try{
+  await this.apiService.deleteUser(inputData);
+  this.selected='';
+  this.message=$localize`Deleted successfully!`;
+  }
+  catch(error:any){
+    console.error('Error from server: ',error);
+    this.selected='';
+    if(error.status==400)  
+    this.message=$localize`No such user exists`;
+    else
+    this.message=$localize`Unknown error`;
+  }
+}
+async getUserById(inputData:number) {
+  try{
+  this.userData=await this.apiService.getUserById(inputData);
+  console.log(this.userData);
+  this.formatUser();
+  this.selected='doneGetUser';
+  }
+  catch(error:any)
+  {
+    console.log(error);
+    this.selected='';
+    if(error.status==404)
+    this.message=$localize`No such user exists`;
+    else
+    this.message=$localize`Unknown error`;
+  }
+}
+async getUserByName(inputData:string) {
+  try{
+  this.userData=await this.apiService.getUserByUsername(inputData);
+  console.log(this.userData);
+  this.formatUser();
+  this.selected='doneGetUser';
+  }
+  catch(error:any)
+  {
+    console.log(error);
+    this.selected='';
+    if(error.status==404)
+    this.message=$localize`No such user exists`;
+    else
+    this.message=$localize`Unknown error`;
+  }
+}
+formatUser() {
+  this.userEntries = Object.entries(this.userData);
+}
+
+
   logout(){
     this.jwtService.logout();
     }

@@ -10,7 +10,7 @@
           <input type="text" id="name" name="name" [(ngModel)]="itemData.name"/>
         </p>
     
-        <p>
+        <p class="scrolldown">
           <label for="type" i18n>Type</label>
           <select id="type" [(ngModel)]="itemData.type">
             <option *ngFor="let type of types" [value]="type">{{ type }}</option>

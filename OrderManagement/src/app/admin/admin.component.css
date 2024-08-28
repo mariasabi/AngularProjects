@@ -38,8 +38,8 @@ header button:active,
     display: flex;
     flex-wrap: wrap;
     font-family: Georgia, 'Times New Roman', Times, serif;
-
-
+    border: 1px solid white;
+    margin: 3px;
 }
 .operations button{
 

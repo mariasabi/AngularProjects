@@ -10,15 +10,37 @@ export class ApiService{
     
 constructor(private http: HttpClient) { }
 
-async getItems(): Promise<any> {
-    try {
-        const data = await this.http.get('https://localhost:7173/api/Order/getItems').toPromise();
+
+async getUsers(): Promise<any> {
+  try {
+      const data = await this.http.get('https://localhost:7044/api/Admin/getUsers').toPromise();
+      console.log(data);
+      return data;
+  } catch (error) {
+      console.error(error);
+      throw error;
+  }
+}
+async deleteUser(inputData:string){
+  const headers=new HttpHeaders({
+      'Content-Type':'application/json'
+    })
+    const response=await this.http.delete<number>(`https://localhost:7044/api/Admin/deleteUser?name=${inputData}`, { headers }).toPromise();
+    return response;
+}
+async getUserByUsername(inputData:string): Promise<any> {
+    
+        const data = await this.http.get(`https://localhost:7044/api/Admin/getUserByUsername?name=${inputData}`).toPromise();
         console.log(data);
         return data;
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
+    
+}
+async getUserById(inputData:number): Promise<any> {
+    
+  const data = await this.http.get(`https://localhost:7044/api/Admin/getUserById?id=${inputData}`).toPromise();
+  console.log(data);
+  return data;
+
 }
 public loginUser(user:User):Observable<string>{
 return this.http.post('https://localhost:7044/api/User/login',user,
@@ -60,7 +82,16 @@ async getItem(inputData:number): Promise<any> {
         return data;
     
 }
-
+async getItems(): Promise<any> {
+  try {
+      const data = await this.http.get('https://localhost:7173/api/Order/getItems').toPromise();
+      console.log(data);
+      return data;
+  } catch (error) {
+      console.error(error);
+      throw error;
+  }
+}
 async getPageItem(page: number, pageSize: number): Promise<any> {
   try {
       const data = await this.http.get(`https://localhost:7173/api/Order/getPaginatedItems?page=${page}&pageSize=${pageSize}`).toPromise();
