@@ -25,7 +25,7 @@
     <button (click)="onDeleteUser()" i18n>Delete User By Username</button>
     <button (click)="fetchOrders()">Get Orders</button>
 </div>
-    <app-grid-items *ngIf="selected === 'fetch'" [itemData]="itemData"></app-grid-items>
+    <app-editable-grid-items *ngIf="selected === 'fetch'"></app-editable-grid-items>
     <app-page-items *ngIf="selected === 'page'"></app-page-items>
     <app-grid-users *ngIf="selected === 'fetchUsers'" [userData]="userData"></app-grid-users>
     <app-grid-orders *ngIf="selected === 'fetchOrders'" [orderData]="orderData"></app-grid-orders>

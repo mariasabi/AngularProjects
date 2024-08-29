@@ -23,6 +23,7 @@
     "@auth0/angular-jwt": "^5.2.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "@syncfusion/ej2-angular-grids": "^26.2.11",
     "ag-grid-angular": "^32.0.2",
     "ag-grid-community": "^32.0.2",
     "angular-jwt": "^0.1.11",

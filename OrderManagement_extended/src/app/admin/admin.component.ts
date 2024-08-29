@@ -15,10 +15,12 @@ import { DeleteUserComponent } from "./delete-user/delete-user.component";
 import { UserData } from './user.model';
 import { GridOrdersComponent } from "./grid-orders/grid-orders.component";
 import { OrderData } from '../order.model';
+import { EditableGridItemsComponent } from '../item-functions/editable-grid-items/editable-grid-items.component';
+
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [GridItemsComponent, CommonModule, PageItemsComponent, UploadComponent, UpdateItemsComponent, DeleteItemComponent, SuccessMessageComponent, GridUsersComponent, DeleteUserComponent, GridOrdersComponent],
+  imports: [GridItemsComponent, CommonModule, PageItemsComponent, UploadComponent, UpdateItemsComponent, DeleteItemComponent, SuccessMessageComponent, GridUsersComponent, DeleteUserComponent, GridOrdersComponent, EditableGridItemsComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
