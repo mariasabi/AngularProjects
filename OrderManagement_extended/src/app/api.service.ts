@@ -113,6 +113,16 @@ async getItems(): Promise<any> {
       throw error;
   }
 }
+async searchItem(name:string): Promise<any> {
+  try {
+      const data = await this.http.get(`https://localhost:7173/api/Order/searchItem?name=${name}`).toPromise();
+      console.log(data);
+      return data;
+  } catch (error) {
+      console.error(error);
+      throw error;
+  }
+}
 async getPageItem(page: number, pageSize: number): Promise<any> {
   try {
       const data = await this.http.get(`https://localhost:7173/api/Order/getPaginatedItems?page=${page}&pageSize=${pageSize}`).toPromise();

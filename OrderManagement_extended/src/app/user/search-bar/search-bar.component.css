@@ -1,0 +1,20 @@
+/* search.component.css */
+.search-container {
+    margin: 20px;
+  }
+  
+  input {
+    padding: 10px;
+    margin-right: 10px;
+    width: 200px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .search-results {
+    margin-top: 20px;
+  }
+  

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { ItemData } from '../../item.model';
 import { ColDef, GridApi, GridReadyEvent, PaginationNumberFormatterParams } from 'ag-grid-community';
 import { AgGridAngular } from 'ag-grid-angular';
@@ -8,29 +8,32 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import { MatSortModule } from '@angular/material/sort';
+import { MatSort, MatSortModule} from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { ToastrService } from 'ngx-toastr';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 @Component({
   selector: 'app-editable-grid-items',
   standalone: true,
-  imports: [MatPaginatorModule,MatTableModule,CommonModule,FormsModule,MatFormFieldModule,MatSortModule,MatButtonModule,MatInputModule],
+  imports: [MatPaginatorModule,MatTableModule,CommonModule,MatSort,FormsModule,MatFormFieldModule,MatSortModule,MatButtonModule,MatInputModule,MatSelectModule,MatOptionModule],
   templateUrl: './editable-grid-items.component.html',
   styleUrls: ['./editable-grid-items.component.css']
 })
 export class EditableGridItemsComponent implements OnInit,AfterViewInit{
 
+
  itemData!: ItemData[]; 
-//itemRow!:ItemData;
-displayedColumns: string[] =['id','name','type','quantity','price','actions'];
-//displayedColumns: string[]=this.getColumnNames() as string[];
+displayedColumns: string[] =['id','name','type','quantity','price','image','actions'];
 dataSource = new MatTableDataSource<ItemData>();
-//displayedColumns!:string[];
+public types: string[] = ['Snacks','Chocolates','Gum','Candy','Beverages','Stationery','Personal care'];
 totalItems=0;
 @ViewChild(MatPaginator) paginator!: MatPaginator;
-//itemRow!:ItemData;
+@ViewChild('fileInput') fileInput!: ElementRef;
+@ViewChild(MatSort) sort!:MatSort;
 pageSizeOptions!:any;
-constructor(private apiService:ApiService){
+constructor(private apiService:ApiService,private toastr:ToastrService){
 }
 getTableData(page:number, pageSize:number){
   return this.apiService.getPageItem(page,pageSize);
@@ -46,10 +49,6 @@ async ngOnInit() {
        const data= await this.apiService.getItems();
         this.totalItems = data.length; 
         this.pageSizeOptions=this.getPageSizeOptions(this.totalItems);
-        // if (data.length === 0) 
-        //     this.displayedColumns=[];
-        // else 
-        //   this.displayedColumns=Object.keys(data[0]);
      }
       catch(error) {          
         console.error('Error fetching items:', error);
@@ -68,9 +67,8 @@ async loadData() {
     const pageIndex=this.paginator.pageIndex;
     const pageSize=this.paginator.pageSize;
     this.itemData = await this.getTableData(pageIndex+1,pageSize);
-   // console.log(this.itemData);
     this.dataSource.data = this.itemData;
-    //console.log(this.dataSource);
+    this.dataSource.sort = this.sort;
    } 
    catch (error) {
     console.error(error);
@@ -95,11 +93,44 @@ async saveChanges(item:any) {
   });
   try{ 
     await this.apiService.updateItems(formData);
+    const message= `Item ${item.name} updated successfully!`
+    this.toastr.success(message, 'Update successful', {
+      timeOut: 3000,
+       positionClass: 'toast-bottom-right'
+    });
    }
     catch(error:any)
     {
       console.error('Error from server: ',error);
     }
   }
+ async deleteItem(item: ItemData) {
+    try{
+      var inputData=item.id;
+      await this.apiService.deleteItem(inputData);
+      const message= `Item ${item.name} deleted successfully!`
+      this.toastr.success(message, 'Delete successful', {
+        timeOut: 3000,
+         positionClass: 'toast-bottom-right'
+      });
+      }
+      catch(error:any){
+        console.error('Error from server: ',error);
+        if(error.status==404)
+          this.toastr.error('No such item exists', 'Item not found', {
+            timeOut: 3000,
+             positionClass: 'toast-bottom-right'
+          });
+        else
+        console.log(error);
+      }
+    }
 
+  onImageSelected(event: any, element: any) {
+    const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    element.image = input.files[0]; 
+    console.log(element.log);
+  }
+  }
 }

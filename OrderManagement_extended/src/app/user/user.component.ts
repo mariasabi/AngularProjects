@@ -5,25 +5,27 @@ import { SuccessMessageComponent } from "../success-message/success-message.comp
 import { ApiService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JwtService } from '../item-functions/jwt.service';
-import { ShortItem } from '../item.model';
+import { ItemData, ShortItem } from '../item.model';
 import { CartItem } from '../cartItem.model';
 import { CartComponent } from "./cart/cart.component";
 import { OrdersComponent } from "./orders/orders.component";
+import {ToastrService} from 'ngx-toastr'
+import { ItemCardComponent } from "./item-card/item-card.component";
+import { SearchBarComponent } from "./search-bar/search-bar.component";
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule, FormsModule, CartComponent, OrdersComponent],
+  imports: [CommonModule, FormsModule, CartComponent, OrdersComponent, ItemCardComponent, SearchBarComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export class UserComponent implements OnInit{
+
 userName!: string;
   ordersVisible: boolean=false;
   cartValue: number=0;
-
-
-  constructor(private route:ActivatedRoute,private router:Router,private apiService:ApiService,private jwtService:JwtService){}
+  constructor(private route:ActivatedRoute,private router:Router,private apiService:ApiService,private jwtService:JwtService, private toastr:ToastrService){}
   title = $localize`Order Management Application`;
   itemData:ShortItem[]=[];
   cartItems: CartItem[]=[];
@@ -48,6 +50,7 @@ await this.fetchInventory();
     throw new Error('Method not implemented.');
     }
     goHome() {
+      this.fetchInventory();
       this.home=true;
       this.cartVisible=false;
       this.ordersVisible=false;
@@ -63,10 +66,12 @@ await this.fetchInventory();
       this.itemData = data;
 })
 .catch((error)=>{
- 
   console.error('Error fetching items:', error);
 });
 }
+searchResults(data:ShortItem[]) {
+  this.itemData=data;
+  }
 async getCartValue(): Promise<void> {
   try {
     this.cartValue = await this.apiService.getCartValue();
@@ -76,47 +81,17 @@ async getCartValue(): Promise<void> {
   }
 }
 
-addToCart(item: ShortItem) {
-  const carItem:CartItem={
-    itemName: item.name,
-    price:item.price,
-    quantity:1
-  }
-  console.log(carItem);
-  this.apiService.addCartItem(carItem)
-  // .then(async (data: any) => {
-  //   this.getCartValue();
-  //   // If the response is a string (likely JSON), first parse it
-  //   let cartItemsRaw: any[] = typeof data === 'string' ? JSON.parse(data) : data;
-    
-  //   // Now map it to ensure it's in the format of CartItem[]
-  //   this.cartItems = cartItemsRaw.map(item => {
-  //     return {
-  //       itemName: item.itemName,
-  //       quantity: item.quantity,
-  //       price: item.price
-  //     } as CartItem;
-  //   });
-    
-  //   console.log(this.cartItems);
-  // })
-  .then(async(data:CartItem[])=>
-    {
-     await this.getCartValue();
-      this.cartItems=data;
- 
-    console.log(this.cartItems);
-  })
-  .catch((error)=>{
-    console.log(error);
-    });
-  }
+
   async openCart(){
     if(this.cartVisible)
+    {
       this.cartVisible=false;
+      this.home=true;
+    }
     else
     {
     this.ordersVisible=false;
+    this.home=false;
     this.getCartValue();
     this.fetchCart();
     this.cartVisible=true;
@@ -124,22 +99,10 @@ addToCart(item: ShortItem) {
   }
   cartVisiblity() {
     this.cartVisible=false;
+    this.home=true;
     }
   fetchCart() {
     this.apiService.getCartItems()
-    // .then(async (data: any) => {
-    //   this.getCartValue();
-    //   // If the response is a string (likely JSON), first parse it
-    //   let cartItemsRaw: any[] = typeof data === 'string' ? JSON.parse(data) : data;
-      
-    //   // Now map it to ensure it's in the format of CartItem[]
-    //   this.cartItems = cartItemsRaw.map(item => {
-    //     return {
-    //       itemName: item.itemName,
-    //       quantity: item.quantity,
-    //       price: item.price
-    //     } as CartItem;
-    //   });
       .then(async(data:CartItem[])=>
       {
        await this.getCartValue();
@@ -157,9 +120,9 @@ addToCart(item: ShortItem) {
   }
   )
 }
-showOrders() {
-  this.home=false;
-  this.cartVisible=false;
-  this.ordersVisible=true;
+showPurchaseMessage() {
+  this.toastr.success('Your purchase is successful!', 'Order placed', {
+    timeOut: 3000,
+  });
   }
 }

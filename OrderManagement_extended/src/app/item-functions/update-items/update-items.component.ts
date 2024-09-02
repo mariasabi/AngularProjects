@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ErrorMessageComponent } from "../../error-message/error-message.component";
 import { SuccessMessageComponent } from "../../success-message/success-message.component";
 import '@angular/localize/init'; 
+
 @Component({
   selector: 'app-update-items',
   standalone: true,

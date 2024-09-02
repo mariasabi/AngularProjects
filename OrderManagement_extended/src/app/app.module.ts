@@ -10,7 +10,7 @@ import { PageItemsComponent } from "./item-functions/page-items/page-items.compo
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { UploadComponent } from "./item-functions/upload/upload.component";
-import { ItemFunctionsComponent } from "./item-functions/item-functions.component";
+
 import { RouterModule, Route, provideRouter, RouterOutlet } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -20,13 +20,16 @@ import {  provideAnimations } from '@angular/platform-browser/animations';
 
 import { RoleSelectionComponent } from './role-selection/role-selection.component';
 import { UserGuard } from './auth/user.guard';
-import { AdminGuard } from './auth/admin.guard';
-
+import {ToastrModule} from 'ngx-toastr'
+import { UserComponent } from './user/user.component';
+import { AdminComponent } from './admin/admin.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
 declarations:[AppComponent,
   
 ],
   imports: [
+    ToastrModule.forRoot(),
     BrowserModule,
     HttpClientModule,
     MatPaginatorModule,
@@ -37,18 +40,17 @@ declarations:[AppComponent,
     DeleteItemComponent,
     PageItemsComponent,
     UploadComponent,
-    ItemFunctionsComponent,
     RouterOutlet,
     RouterModule.forRoot(routes),
     AuthComponent,
     ReactiveFormsModule,
     RoleSelectionComponent,
-
-
-  
+    UserComponent,  
+    AdminComponent,
+    BrowserAnimationsModule
 ],
   bootstrap:[AppComponent],
-providers:[UserGuard,AdminGuard,
+providers:[UserGuard,
   provideAnimations(),
     {
     provide:HTTP_INTERCEPTORS,

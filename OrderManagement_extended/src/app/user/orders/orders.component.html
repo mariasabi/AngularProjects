@@ -4,6 +4,6 @@
       <p>Name: {{order.itemname}}</p>
       <p>Quantity: {{order.quantity}}</p>
       <p>INR {{order.totalPrice}}</p>
-      <p>Ordered on: {{order.orderTime}}</p>
+      <p>Ordered on: {{order.orderTime| date:'medium'}}</p>
     </div>
 </div>

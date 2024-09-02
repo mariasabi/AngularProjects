@@ -1,0 +1,14 @@
+<div class="items-container" *ngIf="itemData.length>0; else noResult">
+    <div *ngFor="let item of itemData" class="item-box">
+      <h3>{{ item.name }}</h3>
+      <p>Type: {{ item.type }}</p>
+      <p>Price: {{ item.price }}</p>
+      <img *ngIf="item.image" [src]="'data:image/jfif;base64,' + item.image" alt="{{ item.name }}" style="width: 150px; height: 150px;">
+      <button (click)="addToCart(item)" class="add-to-cart-btn">Add to Cart</button>
+    </div>
+</div>
+<ng-template #noResult>
+    <div>
+        No results found!
+    </div>
+</ng-template>

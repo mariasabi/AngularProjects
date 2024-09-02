@@ -4,6 +4,7 @@ import { ShortItem } from '../../item.model';
 import { ApiService } from '../../api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-cart',
   standalone: true,
@@ -17,7 +18,7 @@ export class CartComponent {
 @Input() cartItems: CartItem[]=[];
 @Output() visible = new EventEmitter<boolean>();
 @Output() purchase=new EventEmitter<boolean>();
-constructor(private apiService:ApiService){}
+constructor(private apiService:ApiService,private toastr:ToastrService){}
 
 closeCart() {
   this.visible.emit(false);
@@ -33,21 +34,6 @@ async getCartValue(): Promise<void> {
 
   increaseQuantity(cartItem:CartItem) {
   this.apiService.incrementCartItem(cartItem)
-  // .then(async (data: any) => {
-  //   // If the response is a string (likely JSON), first parse it
-  //   let cartItemsRaw: any[] = typeof data === 'string' ? JSON.parse(data) : data;
-    
-  //   // Now map it to ensure it's in the format of CartItem[]
-  //   this.cartItems = cartItemsRaw.map(item => {
-  //     return {
-  //       itemName: item.itemName,
-  //       quantity: item.quantity,
-  //       price: item.price
-  //     } as CartItem;
-  //   });
-  //   this.getCartValue();
-  //   console.log(this.cartItems);
-  // })
   .then(async(data:CartItem[])=>
     {
       await this.getCartValue();
@@ -56,26 +42,18 @@ async getCartValue(): Promise<void> {
     console.log(this.cartItems);
   })
   .catch((error: any) => {
+    if(error.status==404)
+    {
+      this.toastr.info('Maximum item quantity that can be added has been reached','Item out of stock', {
+        timeOut: 3000,
+         positionClass: 'toast-bottom-right'
+      });
+    }
     console.error('Error fetching cart items:', error);
   });
     }
    reduceQuantity(cartItem:CartItem) {
       this.apiService.decrementCartItem(cartItem)
-      // .then(async (data: any) => {
-      //   // If the response is a string (likely JSON), first parse it
-      //   let cartItemsRaw: any[] = typeof data === 'string' ? JSON.parse(data) : data;
-        
-      //   // Now map it to ensure it's in the format of CartItem[]
-      //   this.cartItems = cartItemsRaw.map(item => {
-      //     return {
-      //       itemName: item.itemName,
-      //       quantity: item.quantity,
-      //       price: item.price
-      //     } as CartItem;
-      //   });
-      //   this.getCartValue();
-      //   console.log(this.cartItems);
-      // })
       .then(async(data:CartItem[])=>
         {
           await this.getCartValue();
@@ -89,21 +67,6 @@ async getCartValue(): Promise<void> {
     }
    removeCartItem(item: CartItem) {
     this.apiService.removeCartItem(item)
-    // .then(async (data: any) => {
-    //   // If the response is a string (likely JSON), first parse it
-    //   let cartItemsRaw: any[] = typeof data === 'string' ? JSON.parse(data) : data;
-      
-    //   // Now map it to ensure it's in the format of CartItem[]
-    //   this.cartItems = cartItemsRaw.map(item => {
-    //     return {
-    //       itemName: item.itemName,
-    //       quantity: item.quantity,
-    //       price: item.price
-    //     } as CartItem;
-    //   });
-    //   this.getCartValue();
-    //   console.log(this.cartItems);
-    // })
     .then(async(data:CartItem[])=>
       {await this.getCartValue();
         this.cartItems=data;
