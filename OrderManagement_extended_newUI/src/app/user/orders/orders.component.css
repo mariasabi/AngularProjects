@@ -1,0 +1,11 @@
+
+  ::ng-deep .mat-mdc-paginator {
+    background-color: #f7f0f0 !important;
+  }
+  ::ng-deep .mat-mdc-table .mat-mdc-header-cell {
+    background: #f7f0f0 !important;
+  }
+  ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: transparent !important;
+  }
+  

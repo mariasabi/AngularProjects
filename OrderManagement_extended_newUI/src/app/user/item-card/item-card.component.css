@@ -1,0 +1,43 @@
+.items-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to a new row if they overflow */
+    gap: 16px; /* Space between the item divs */
+    justify-content: flex-start; /* Aligns the items to the left (you can change it to center if needed) */
+    
+  }
+  
+  .item-box {
+    border: 1px solid #ccc;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  }
+  
+  .item-box img {
+    width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  }
+  .add-to-cart-btn{
+    background-color: #69506b;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .add-to-cart-btn:hover{
+    background-color: #EECEB9;
+    color:#433352;
+  }
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    color: #867070; /* Change color to your theme */
+  }
+  

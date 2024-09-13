@@ -1,0 +1,36 @@
+<!-- add-item-dialog.component.html -->
+<div class="modal-header m-4">
+    <h5 class="modal-title">Add New Item</h5>
+    <button type="button" class="btn-close ms-auto p-1" aria-label="Close" (click)="closeDialog()"></button>
+  </div>
+  <div class="modal-body m-4">
+    <form (ngSubmit)="submitForm()" #itemForm="ngForm">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" id="name" name="name" class="form-control" [(ngModel)]="itemData.name" required>
+      </div>
+      <div class="mb-3">
+        <label for="type" class="form-label">Type</label>
+        <select id="type" name="type" class="form-select" [(ngModel)]="itemData.type" required>
+          <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity</label>
+        <input type="number" id="quantity" name="quantity" class="form-control" [(ngModel)]="itemData.quantity" required>
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" id="price" name="price" class="form-control" [(ngModel)]="itemData.price" required>
+      </div>
+      <div>
+        <label for="image" i18n>Image</label>
+        <input type="file" id="image" name="image" (change)="onImageSelected($event)"/>
+      </div>
+    </form>
+    <app-error-message *ngIf="displayError" [message]="message"/>
+  </div>
+  <div class="modal-footer m-4">
+    <button type="button" class="btn btn-primary" (click)="submitForm()">Save</button>
+  </div>
+  

@@ -1,0 +1,99 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the theme object.
+
+$OrderManagement-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  typography:(
+    brand-family:'DM Sans',
+    plain-family:'DM Sans'
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+:root {
+  @include mat.all-component-themes($OrderManagement-theme);
+}
+
+// Comment out the line below if you want to use the pre-defined typography utility classes.
+// For more information: https://material.angular.io/guide/typography#using-typography-styles-in-your-application.
+// @include mat.typography-hierarchy($OrderManagement-theme);
+
+// Comment out the line below if you want to use the deprecated `color` inputs.
+// @include mat.color-variants-backwards-compatibility($OrderManagement-theme);
+// 1. Import Bootstrap's functions first
+@import '../node_modules/bootstrap/scss/functions';
+
+// 2. Define custom variables and theme colors
+$primary:#D5B4B4;
+$secondary: #E4D0D0;
+$dark:  #867070;
+$light: #f5ebeb;
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "light": $light,
+  "dark": $dark
+);
+
+// 3. Import the rest of Bootstrap after the variable overrides
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+// 4. Custom global styles
+html, body {
+  background-color: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: "DM Sans", 'Times New Roman', Times, serif;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: "DM Sans", 'Times New Roman', Times, serif; }
+/* In styles.css */
+.toast-top-right {
+  top: 5rem !important; /* Ensure this gets applied */
+}
+
+.toast-success {
+  background-color: #867070 !important;  /* Use !important if needed */
+  color: white !important; /* Make sure this applies */
+  padding: 1rem !important;
+  border-radius: 0.25rem !important;
+  padding: 1rem !important; 
+ 
+}
+.toast-error {
+  background-color: #867070 !important;  /* Use !important if needed */
+  color: white !important; /* Make sure this applies */
+  padding: 1rem !important;
+  border-radius: 0.25rem !important;
+  padding: 1rem !important; 
+}
+.toast-success .toast-title,
+.toast-error .toast-title,
+.toast-error .toast-message,
+.toast-success .toast-message{
+padding-left:2rem !important;
+}

@@ -1,0 +1,45 @@
+<div *ngIf="loading" class="text-center my-3">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="!loading">
+  <div class="container mt-3" *ngIf="itemData.length>0; else noResult">
+    <div class="row g-3"> <!-- Bootstrap grid system with spacing -->
+      <div *ngFor="let item of itemData" class="col-6 col-md-4 col-lg-3">
+        <div class="card h-100 shadow-sm text-center position-relative"> <!-- Card for layout, h-100 for equal height -->
+          
+          <!-- Type Badge at the top left -->
+          <!-- <div class="badge bg-dark text-white position-absolute top-0 start-0" style="z-index: 1;"> <!-- Adjust bg-primary for any color you want -->
+            <!-- {{ item.type }}
+          </div> --> 
+          <div *ngIf="!category" class="card-header bg-light fs-8">
+            {{ item.type }}
+          </div>
+          <div class="card-body mt-3">
+            <img class="card-img-top" style="width: 150px; height: 150px; " [src]="'data:image/jfif;base64,' + item.image" alt="{{ item.name }}">
+            <h5 class="card-title mt-2">{{ item.name }}</h5>
+            <p class="card-text">Price: {{ item.price }}</p>
+            <!-- <img *ngIf="item.image" [src]="'data:image/jfif;base64,' + item.image" alt="{{ item.name }}" class="img-fluid mb-3" style="width: 150px; height: 150px; object-fit: cover;"> -->
+            <button (click)="addToCart(item)" class="btn btn-primary">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <ng-template #noResult>
+    <div class="alert alert-warning text-center">
+      No results found!
+    </div>
+  </ng-template>
+  
+</div>
+
+
+
+
+
+

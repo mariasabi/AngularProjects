@@ -1,0 +1,64 @@
+
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: transparent !important;
+}
+::ng-deep .mat-mdc-button:not(:disabled) {
+    background-color: #D5B4B4 !important;
+    color: black !important;
+    font-weight: light;
+}
+::ng-deep .mat-mdc-raised-button:not(:disabled) {
+color: black !important;
+}
+/* ::ng-deep .mat-mdc-text-field-wrapper {
+    width: 70% !important;
+
+} */
+.file-input-wrapper {
+    width: 150px; /* Set desired width */
+    overflow: hidden; /* Hide overflow */
+}
+
+.custom-file-input {
+    width: 100%;
+    padding: 4px;
+    box-sizing: border-box;
+}
+::ng-deep .mat-mdc-table .mat-mdc-header-cell {
+    background: #f7f0f0 !important;
+}
+::ng-deep .mat-mdc-raised-button:not(:disabled) {
+  
+    background-color:  #f7f0f0 !important;
+}
+::ng-deep .mat-mdc-paginator {
+    background-color: #f7f0f0 !important;
+}
+.custom-icon-button {
+    background-color: #D5B4B4; /* Primary color */
+          /* Icon color */
+    border-radius: 50%;        /* Make the button circular */
+    padding: 8px;              /* Adjust padding */
+  }
+  
+  .custom-icon-button:hover {
+    background-color: #E4D0D0; /* Secondary color on hover */
+  }
+  
+  .custom-icon-button mat-icon {
+    font-size: 24px;  /* Icon size */
+  }
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  /* Ensure form fields inside table cells are responsive */
+  .mat-form-field {
+    width: 100%;
+  }
+  
+  /* Adjust size of form fields if needed */
+  .mat-form-field .mat-form-field-flex {
+    flex: 1;
+  }

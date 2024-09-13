@@ -1,0 +1,25 @@
+.scroll-container {
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scroll-behavior: smooth; /* Smooth scroll */
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+  }
+  
+  .scroll-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in WebKit-based browsers (Chrome, Safari, etc.) */
+  }
+  
+.category-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px); /* Lifts the card slightly */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a shadow on hover */
+    cursor: pointer; /* Shows pointer cursor on hover */
+}
+
+.category-card:hover .card-title {
+    color: #867070; /* Change the card title color on hover */
+}

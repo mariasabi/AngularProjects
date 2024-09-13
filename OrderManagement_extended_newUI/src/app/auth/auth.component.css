@@ -1,0 +1,7 @@
+.large-img {
+    width: 120%; /* Make the image wider than its container */
+    margin-right: -25%; /* Move the image outside the right boundary */
+    position: relative;
+    z-index: 1; /* Ensure the image is above the content */
+  }
+  

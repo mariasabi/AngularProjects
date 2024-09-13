@@ -1,0 +1,20 @@
+/* Ensure the image takes half the viewport height */
+.full-width-image {
+    width: 100%;
+    height: 50vh; /* 50% of the viewport height */
+    object-fit: cover; /* Maintain aspect ratio and cover the height */
+  }
+  
+  /* Position text overlay in the top-right corner */
+  .image-container {
+    position: relative;
+  }
+  
+  .text-overlay {
+    position: absolute;
+    top: 5rem; /* Distance from the top */
+    right: 3rem; /* Distance from the right */
+    left: 40rem;
+    color: black; /* Text color */
+  
+  }

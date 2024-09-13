@@ -1,0 +1,13 @@
+<div class="update-items">
+    <form class="form-items" (ngSubmit)="onSubmit()">
+        <p >
+          <label for="id" i18n>Id</label>
+          <input type="number" id="id" name="id" [(ngModel)]="id" />
+        </p>
+    
+        <p class="actions">
+           <button type="submit">{{buttonName}}</button>
+        </p>
+      </form>
+      <app-error-message *ngIf="displayError" [message]="message"/>
+    </div>

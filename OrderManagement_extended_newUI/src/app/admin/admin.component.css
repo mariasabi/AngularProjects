@@ -1,0 +1,109 @@
+/* 
+header{
+  display: flex;
+  background-color: #433352;
+  color: white;
+  align-items: center;
+  padding: 1rem;
+}
+header h1{
+  padding: 0.4rem;
+  font-weight:400;
+}
+header h5{
+margin-top: auto;
+margin-left: auto;
+padding:0.4rem;
+font-weight:300;
+margin-bottom: 0;
+}
+header button{
+transition: background-color 0.3s ease;
+margin-top: auto;
+background-color: #EECEB9;
+color: #433352;
+cursor: pointer;
+font-family: inherit;
+padding: 0.5rem;
+margin-left: 2rem;
+font-size: small;
+border: 1px solid white;
+border-radius: 12px;
+}
+header button:hover,
+header button:active,
+.active {
+background-color: #69506b;
+color: white;
+} */
+.logo-img{
+    width: 4rem;  /* Adjust this value as needed */
+    height: auto; /* Keeps the aspect ratio */
+}
+.nav-link-custom:hover,
+.nav-link-custom:focus {
+    /* Darker background color on hover */
+    transition: transform 0.2s ease;
+    transform: scale(1.1); /* Increase size to 110% */
+}
+.router-link-active i{
+color: #867070;
+}
+.operations{
+    display: flex;
+    flex-wrap: wrap;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border: 1px solid white;
+    margin: 3px;
+}
+.operations button{
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.5rem;
+    background-color: #69506b;
+    color: white;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    flex: 1 1 auto;
+    min-width: 10 rem;
+    text-align: left;
+    transition: background-color 0.3s ease;
+
+}
+.operations button:hover,
+.operations button:active,
+.active {
+  background-color: #EECEB9;
+  color: #433352;
+}
+
+.item-grid{
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.form-grid{
+display: flex;
+justify-content: center;
+align-content: center;
+}
+.get-item {
+    background-color: #433352;
+    color: white;
+    font-size: medium;
+    display: inline-block;
+    flex-direction: column;
+    align-content: center;
+    margin: 2rem;
+    padding:1rem;
+    text-align: left;
+  }
+  
+  .get-item pre {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    white-space: pre-wrap;
+  }

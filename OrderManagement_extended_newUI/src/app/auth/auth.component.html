@@ -1,0 +1,80 @@
+
+  <div class="container d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+    <div class="row d-flex justify-content-center bg-white shadow-lg rounded border-5" style="min-height: 50vh;">
+      <div class="col-md-6 bg-light d-flex flex-column justify-content-between align-items-start">
+        <div class="display-6 mt-5 ms-2">Welcome to Quick Buy!</div> 
+        <img src="assets/shopping.png" alt="shopping" class="img-fluid d-none d-md-block align-self-end large-img"  />
+      </div>
+      
+      <div class="col-md-6 p-3 d-flex flex-column justify-content-center align-items-center" *ngIf="buttonName != 'Reset password'">
+        <form (ngSubmit)="onSubmit()" style="width: inherit;">
+          <div class="mb-3">
+            <label for="name" class="form-label" i18n>Username</label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="user.username" required/>
+          </div>
+
+          <div class="mb-3" *ngIf="buttonName == 'Register'">
+            <label for="email" class="form-label" i18n>Email</label>
+            <input type="text" class="form-control" id="email" name="email" [(ngModel)]="user.email" required email/>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label" i18n>Password</label>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password" required/>
+          </div>
+
+          <div class="mb-3" *ngIf="buttonName == 'Register'">
+            <label for="hindi" class="form-label" i18n>Hindi Name</label>
+            <input type="text" class="form-control" id="hindi" name="hindi" [(ngModel)]="user.hindiName" required/>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary fw-normal">{{displayButton}}</button>
+          </div>
+
+          <div class="d-grid gap-2 mt-2" *ngIf="buttonName == 'Login'">
+            <button type="button" class="btn btn-link" (click)="signup()" i18n>Click here to register</button>
+          </div>
+
+          <div class="d-grid gap-2 mt-2" *ngIf="buttonName == 'Login'">
+            <button type="button" class="btn btn-link" (click)="forgotPassword()" i18n>Reset password</button>
+          </div>
+
+          <div class="d-grid gap-2 mt-2" *ngIf="buttonName == 'Register'">
+            <button type="button" class="btn btn-link" (click)="back()" i18n>Back to Login</button>
+          </div>
+          
+        </form>
+        <app-error-message *ngIf="message != ''" [message]="message"></app-error-message>
+      </div>
+
+      <div class="col-md-6 py-4 d-flex flex-column justify-content-center align-items-center" *ngIf="buttonName == 'Reset password'">
+        <form (ngSubmit)="onReset()" style="width: inherit;">
+          <div class="mb-3">
+            <label for="name" class="form-label" i18n>Username</label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="resetUser.username" />
+          </div>
+
+          <div class="mb-3">
+            <label for="oldpassword" class="form-label" i18n>Old Password</label>
+            <input type="password" class="form-control" id="oldpassword" name="oldpassword" [(ngModel)]="resetUser.oldpassword" />
+          </div>
+
+          <div class="mb-3">
+            <label for="newpassword" class="form-label" i18n>New Password</label>
+            <input type="password" class="form-control" id="newpassword" name="newpassword" [(ngModel)]="resetUser.newpassword" />
+          </div>
+
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary fw-normal">{{displayButton}}</button>
+          </div>
+
+          <div class="d-grid gap-2 mt-2">
+            <button type="button" class="btn btn-link" (click)="back()" i18n>Back to Login</button>
+          </div>
+        </form>
+        <app-error-message *ngIf="message != ''" [message]="message"></app-error-message>
+      </div>
+    </div>
+  </div>
+

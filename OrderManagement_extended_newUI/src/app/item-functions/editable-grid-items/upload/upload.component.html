@@ -1,0 +1,16 @@
+<div class="modal-header m-4">
+    <h5 class="modal-title">Bulk Upload Items</h5>
+    <button type="button" class="btn-close ms-auto p-1" aria-label="Close" (click)="closeDialog()"></button>
+  </div>
+  <div class="modal-body m-4 d-flex justify-content-center">
+    <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" class="d-none">
+    <button class="btn btn-primary" (click)="file.click()" i18n>Upload File</button>
+</div>
+<div class="modal-body">
+    <div *ngIf="progress > 0" class="text-center mb-2">
+      <span class="badge bg-info">{{ progress }}%</span>
+    </div>
+    <div *ngIf="message" class="text-center">
+      <span class="badge bg-dark">{{ message }}</span>
+    </div>
+</div>

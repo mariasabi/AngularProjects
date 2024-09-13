@@ -1,0 +1,13 @@
+.search-container .form-control, 
+.search-container .btn {
+  height: 30px; /* Reduce height of input and button */
+  padding: 4px 8px; /* Adjust padding for a more compact look */
+}
+
+.search-container .btn i {
+  font-size: 16px; /* Adjust icon size if needed */
+}
+
+.search-container .input-group {
+  max-width: 300px; /* Adjust the width of the search bar if needed */
+}

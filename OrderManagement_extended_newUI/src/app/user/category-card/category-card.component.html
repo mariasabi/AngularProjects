@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row mt-5">
+      <div class="col-12 d-flex justify-content-between align-items-center">
+        <button class="btn btn-secondary" (click)="scrollLeft()">&#8592; Back</button>
+        <h2 class="display-7 mb-2">Categories</h2>
+        <button class="btn btn-secondary" (click)="scrollRight()">Next &#8594;</button>
+      </div>
+    </div>
+  
+    <!-- Scrollable row with cards -->
+    <div class="row mt-3">
+      <div class="col-12">
+        <div class="overflow-hidden position-relative">
+          <!-- Horizontal scroll container -->
+          <div class="scroll-container d-flex flex-nowrap" #scrollContainer style="overflow-x: auto;">
+            <div *ngFor="let type of categories" class="col-6 col-md-4 col-lg-3 flex-shrink-0">
+              <!-- Add a click event to the card -->
+              <div class="card text-center shadow-sm category-card" style="width:15rem;" (click)="selectCategory(type)">
+                <img [src]="'assets/' + type + '.jpg'" alt="{{ type }}" class="card-img-top" style="width: 15rem; height: 150px; object-fit: cover;"/>
+                <div class="card-body">
+                  <h5 class="card-title">{{ type | titlecase }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
