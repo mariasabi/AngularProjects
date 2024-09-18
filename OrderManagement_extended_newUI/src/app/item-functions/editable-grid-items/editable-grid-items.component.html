@@ -1,6 +1,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-<div class="container fluid mt-4">
+<div class="container-fluid table-container mt-4">
     <div class="row">
         <div class="col-12 d-flex justify-content-between align-items-center mb-3">
             <div class="d-flex justify-content-start" style="gap:1rem;">
@@ -83,9 +83,18 @@
                     </td>
                 </ng-container>
 
-                <!-- Actions Column -->
                 <ng-container [matColumnDef]="displayedColumns[6]">
                     <th mat-header-cell *matHeaderCellDef>{{displayedColumns[6] | titlecase}}</th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-form-field  appearance="fill" class="w-100">
+                            <input matInput type="string" [(ngModel)]="element.description" class="form-control">
+                        </mat-form-field>
+                    </td>
+                </ng-container>
+
+                <!-- Actions Column -->
+                <ng-container [matColumnDef]="displayedColumns[7]">
+                    <th mat-header-cell *matHeaderCellDef>{{displayedColumns[7] | titlecase}}</th>
                     <td mat-cell *matCellDef="let element">
                         <div class="d-flex p-3" style="gap:0.5rem;">
                         <button mat-icon-button matTooltipPosition="right" matTooltip="Save item" (click)="saveChanges(element)" class="custom-icon-button" aria-label="Save">

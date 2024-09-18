@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, Input, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, Inject, Input, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import {User } from './user.model';
 import { ApiService } from '../api.service';
 import { CommonModule } from '@angular/common';
@@ -12,11 +12,11 @@ import '@angular/localize/init'; // Ensure this import is present
 import { JwtService } from '../item-functions/jwt.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RoleSelectionComponent } from '../role-selection/role-selection.component';
-
+import { NgOtpInputModule } from  'ng-otp-input';
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [CommonModule, FormsModule,ErrorMessageComponent],
+  imports: [CommonModule, FormsModule,ErrorMessageComponent,NgOtpInputModule],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css'
 })
@@ -24,12 +24,15 @@ export class AuthComponent implements OnInit{
 constructor(private dialog: MatDialog,private jwtService:JwtService,private http:HttpClient,private apiService:ApiService,private router:Router){
 
 }
+@ViewChild('ngOtpInput', { static: false}) ngOtpInput: any;
 buttonName:string='Login';
 displayButton:string=$localize`Login`;
 isSignup:boolean=false;
 language: string | null = null;
 username!:any;
 isAdmin!:boolean;
+otpCode: string = ''; // Stores the entered OTP
+step:number=1;
 //showMessage:boolean=false;
 message:string=``;
 user:User={
@@ -39,10 +42,15 @@ user:User={
   hindiName:''
 };
 resetUser={
-  username:'',
-  oldpassword:'',
-  newpassword:''
+  email:'',
+  newPassword:''
 }
+  config = {
+    length: 6,  // Define OTP length (6 digits)
+    inputClass: 'otp-input',  // Custom CSS class for OTP inputs
+    allowNumbersOnly: true,  // Only allow numeric input
+    isPasswordInput: false,  // Whether the OTP should be masked as password
+  };
 ngOnInit(): void {
   this.language = this.getLanguageFromWindow();
 }
@@ -59,32 +67,74 @@ onSubmit()
   else
     this.register(this.user);
 }
+onOtpChange(otp: string) {
+  this.otpCode = otp;
+  console.log('Current OTP:', this.otpCode);
+}
+
 onReset()
 {
-  if(this.resetUser.username==''||this.resetUser.oldpassword==''||this.resetUser.newpassword=='')
+  if(this.resetUser.email=='')
     {
       //this.showMessage=true;
-      this.message=$localize`Some fields are empty`;
+      this.message=$localize`Please enter email`;
     }
   else
   {
-  this.apiService.resetUser(this.resetUser).subscribe((res)=>
+  this.apiService.forgotPassword(this.resetUser.email).subscribe((res)=>
     {     
      // this.showMessage=true;
-      this.message=$localize`Reset successful`;
+   //   this.message=res;
+      this.step=2 // OTP has been sent
+      this.displayButton = $localize`Verify OTP`;
     },
     (error:any)=>
     {
-      console.error('Reset failed:', error);
+      console.error('OTP generation failed:', error);
       //this.showMessage=true;
       if(error.status==400)
-      this.message=$localize`Username or old password is not valid.`;
+      this.message=error.error.message;
       else
       this.message=$localize`Unknown error`;
     });
   }
 }
-
+onVerifyOtp() {
+  if (this.otpCode === '') {
+    this.message = $localize`Please enter the OTP`;
+  } else {
+    this.apiService.validateOTP(this.resetUser.email, this.otpCode).subscribe(
+      (res) => {
+       // this.message = res;
+        this.step=3; // Reset the form
+        this.displayButton = $localize`Submit`;
+      },
+      (error: any) => {
+        console.error('OTP verification failed:', error);
+        this.message = $localize`Invalid OTP or error occurred`;
+      }
+    );
+  }
+}
+onSubmitNewPassword() {
+  if (this.resetUser.newPassword === '') {
+    this.message = $localize`Please enter a new password`;
+  } else {
+    this.apiService.resetPassword(this.resetUser).subscribe(
+      (res) => {
+        this.message = $localize`Password reset successfully!`;
+        // this.step = 1; // Reset the form
+        // this.resetUser.email = '';
+        // this.resetUser.newPassword = '';
+        // this.otpCode = '';
+      },
+      (error: any) => {
+        console.error('Password reset failed:', error);
+        this.message = $localize`Error occurred while resetting password`;
+      }
+    );
+  }
+}
 public login(user:User)
 {
   console.log(user);
@@ -182,7 +232,7 @@ back()
 forgotPassword(){
   this.message='';
   this.buttonName=`Reset password`;
-  this.displayButton=$localize`Reset password`;
+  this.displayButton=$localize`Send OTP`;
 }
 public register(user:User)
 {

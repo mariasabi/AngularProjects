@@ -62,3 +62,7 @@ color: black !important;
   .mat-form-field .mat-form-field-flex {
     flex: 1;
   }
+  .table-container{
+    width: 100%;
+    overflow-x: auto; 
+  }

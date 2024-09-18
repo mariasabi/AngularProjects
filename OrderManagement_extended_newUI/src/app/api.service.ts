@@ -73,9 +73,28 @@ public registerUser(user:User):Observable<string>{
     {responseType:'text',}
   );
 }
-public resetUser(user:any):Observable<string>{
+public forgotPassword(email:string):Observable<string>{
+  return this.http.post('https://localhost:7044/api/User/forgotPassword',{email},
+    {
+      responseType: 'text',
+      headers: { 'Content-Type': 'application/json' }  // Set the content type to JSON
+    }
+  );
+}
+public validateOTP(email:string,otp:string):Observable<string>{
+  return this.http.post(`https://localhost:7044/api/User/validateOTP?otp=${otp}`,{email},
+    {
+      responseType: 'text',
+      headers: { 'Content-Type': 'application/json' }  // Set the content type to JSON
+    }
+  );
+}
+public resetPassword(user:any):Observable<string>{
   return this.http.put('https://localhost:7044/api/User/resetPassword',user,
-    {responseType:'text',}
+    {
+      responseType: 'text',
+      headers: { 'Content-Type': 'application/json' }  // Set the content type to JSON
+    }
   );
 }
 public getHindiName(username:string):Observable<string>{
@@ -86,6 +105,7 @@ async updateItems(inputData:FormData){
    
     })
     const response=await this.http.put(`https://localhost:7173/api/Order/updateItem`,inputData, { headers }).toPromise();
+    
      return response;  
 }
 

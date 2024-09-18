@@ -31,7 +31,7 @@ export class EditableGridItemsComponent implements OnInit{
 
 
 itemData!: ItemData[]; 
-displayedColumns: string[] =['id','name','type','quantity','price','image','actions'];
+displayedColumns: string[] =['id','name','type','quantity','price','image','description','actions'];
 dataSource = new MatTableDataSource<ItemData>();
 types = ITEM_TYPES;
 totalItems=0;
@@ -91,6 +91,7 @@ async saveChanges(item:any) {
   formData.append('type', item.type.toString());
   formData.append('quantity', item.quantity.toString());
   formData.append('price', item.price.toString());
+  formData.append('description', item.description.toString());
   if (item.image) {
     formData.append('image', item.image);
   }

@@ -19,6 +19,8 @@ export class ItemCardComponent implements OnInit {
   @Input() itemData!:ShortItem[];
   @Input() loading!:boolean;
   @Input() category!:string|null;
+  hoverItem: ShortItem|null=null;
+
   constructor(private apiService:ApiService,private toastr:ToastrService){}
   ngOnInit(): void {
     console.log(this.itemData);

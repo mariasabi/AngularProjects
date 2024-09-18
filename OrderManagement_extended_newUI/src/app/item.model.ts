@@ -4,12 +4,14 @@ export interface ItemData{
     type:string,
     quantity:number,
     price:number,
+    description:string,
     image:any
   }
 export interface ShortItem{
   name:string,
   type:string,
   price:number,
+  description:string,
   image:any
 }
   

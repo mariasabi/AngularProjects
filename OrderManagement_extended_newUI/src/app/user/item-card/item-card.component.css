@@ -41,3 +41,48 @@
     color: #867070; /* Change color to your theme */
   }
   
+/* Card styles */
+.item-card {
+  position: relative;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.item-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Image wrapper for the card */
+.item-image-wrapper img {
+  width: 150px;
+  height: 150px;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Tooltip-like container */
+.hover-tooltip {
+  position: absolute;
+  top: -30px; /* Adjust positioning as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 250px;
+  text-align: center;
+  white-space: normal; 
+}
+
+.hover-tooltip .hover-image {
+  width: 200px; /* Enlarged image size */
+  height: auto;
+}
+
+.hover-tooltip .hover-description {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+  display: block;
+  word-wrap: break-word; 
+}

@@ -23,7 +23,8 @@ export class AddItemComponent {
     type:'',
     quantity:0,
     price:0,
-    image:null
+    image:null,
+    description:''
   };
   types=ITEM_TYPES
   displayError: boolean=false;

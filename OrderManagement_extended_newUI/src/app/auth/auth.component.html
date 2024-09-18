@@ -37,7 +37,7 @@
           </div>
 
           <div class="d-grid gap-2 mt-2" *ngIf="buttonName == 'Login'">
-            <button type="button" class="btn btn-link" (click)="forgotPassword()" i18n>Reset password</button>
+            <button type="button" class="btn btn-link" (click)="forgotPassword()" i18n>Forgot password</button>
           </div>
 
           <div class="d-grid gap-2 mt-2" *ngIf="buttonName == 'Register'">
@@ -48,33 +48,56 @@
         <app-error-message *ngIf="message != ''" [message]="message"></app-error-message>
       </div>
 
-      <div class="col-md-6 py-4 d-flex flex-column justify-content-center align-items-center" *ngIf="buttonName == 'Reset password'">
-        <form (ngSubmit)="onReset()" style="width: inherit;">
+      <div class="col-md-6  p-3 d-flex flex-column justify-content-center align-items-center" *ngIf="buttonName == 'Reset password'">
+        <!-- Step 1: Email Submission Form -->
+        <form (ngSubmit)="onReset()" *ngIf="step === 1" style="width: inherit;">
           <div class="mb-3">
-            <label for="name" class="form-label" i18n>Username</label>
-            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="resetUser.username" />
+            <label for="email" class="form-label" i18n>Email</label>
+            <input type="text" class="form-control" id="email" name="email" [(ngModel)]="resetUser.email" />
           </div>
-
-          <div class="mb-3">
-            <label for="oldpassword" class="form-label" i18n>Old Password</label>
-            <input type="password" class="form-control" id="oldpassword" name="oldpassword" [(ngModel)]="resetUser.oldpassword" />
-          </div>
-
-          <div class="mb-3">
-            <label for="newpassword" class="form-label" i18n>New Password</label>
-            <input type="password" class="form-control" id="newpassword" name="newpassword" [(ngModel)]="resetUser.newpassword" />
-          </div>
-
           <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary fw-normal">{{displayButton}}</button>
           </div>
-
           <div class="d-grid gap-2 mt-2">
             <button type="button" class="btn btn-link" (click)="back()" i18n>Back to Login</button>
           </div>
         </form>
+      
+        <!-- Step 2: OTP Verification Form -->
+        <form (ngSubmit)="onVerifyOtp()" *ngIf="step === 2" style="width: inherit;">
+          <div class="mb-3">
+            <label for="otp" class="form-label" i18n>Enter OTP</label>
+            <div class="otp-container mb-3 ">
+              <!-- OTP Input Component -->
+              <ng-otp-input
+                #ngOtpInput
+                (onInputChange)="onOtpChange($event)"
+                [config]="config"
+              ></ng-otp-input>
+            </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary fw-normal">{{displayButton}}</button>
+          </div>
+        </div>
+        </form>
+      
+        <!-- Step 3: New Password Submission Form -->
+        <form (ngSubmit)="onSubmitNewPassword()" *ngIf="step === 3" style="width: inherit;">
+          <div class="mb-3">
+            <label for="newPassword" class="form-label" i18n>Enter New Password</label>
+            <input type="password" class="form-control" id="newPassword" name="newPassword" [(ngModel)]="resetUser.newPassword" />
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary fw-normal">{{displayButton}}</button>
+          </div>
+          <div class="d-grid gap-2 mt-2">
+            <button type="button" class="btn btn-link" (click)="back()" i18n>Back to Login</button>
+          </div>
+        </form>
+      
         <app-error-message *ngIf="message != ''" [message]="message"></app-error-message>
       </div>
+      
     </div>
   </div>
 
