@@ -1,0 +1,38 @@
+<div class="update-items">
+    <form class="form-items" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+        <p *ngIf="buttonName=='Update'">
+          <label for="id" i18n>Id</label>
+          <input type="number" id="id" name="id" [(ngModel)]="itemData.id" />
+        </p>
+    
+        <p>
+          <label for="name" i18n>Name</label>
+          <input type="text" id="name" name="name" [(ngModel)]="itemData.name"/>
+        </p>
+    
+        <p class="scrolldown">
+          <label for="type" i18n>Type</label>
+          <select id="type" name="type" [(ngModel)]="itemData.type">
+            <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+          </select>
+          
+          <!-- <input type="text" id="type" name="type" [(ngModel)]="itemData.type"/> -->
+        </p>
+        <p>
+            <label for="quantity" i18n>Quantity</label>
+            <input type="number" id="quantity" name="quantity" [(ngModel)]="itemData.quantity"/>
+          </p>
+          <p>
+            <label for="price" i18n>Price</label>
+            <input type="number" id="price" name="price" [(ngModel)]="itemData.price"/>
+          </p>
+          <p>
+            <label for="image" i18n>Image</label>
+            <input type="file" id="image" name="image" (change)="onImageSelected($event)"/>
+          </p>
+        <p class="actions">
+           <button type="submit">{{buttonName}}</button>
+        </p>
+      </form>
+      <app-error-message *ngIf="displayError" [message]="message"/>
+    </div>

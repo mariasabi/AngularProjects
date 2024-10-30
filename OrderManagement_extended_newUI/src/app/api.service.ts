@@ -194,16 +194,12 @@ async getCartItems(): Promise<any> {
       throw error;
   }
 }
-async addCartItem(item:CartItem): Promise<any>{
+addCartItem(item:CartItem): Observable<any>{
+  const header=new HttpHeaders({
+    contentsType:"application/json"
+     })
 
-  try{
-    const response=await this.http.post(`https://localhost:7044/addCartItem`,item,{headers: { 'Content-Type': 'application/json' }}).toPromise();
-    return response;
-    }
-    catch (error) {
-      console.error('Error adding cart item:', error);
-      throw error;
-    }
+    return this.http.post(`https://localhost:7044/addCartItem`,item,{headers:header})
 }
 async incrementCartItem(item:CartItem): Promise<any>{
   try{
@@ -246,16 +242,16 @@ async purchaseCart(): Promise<any>{
       throw error;
     }
 }
-async getUserOrders(): Promise<any>{
-  try{
-    const response=await this.http.get(`https://localhost:7044/getOrders`).toPromise();
-    return response;
-    }
-    catch (error) {
-      console.error('Error retrieving user orders:', error);
-      throw error;
-    }
-}
+// async getUserOrders(): Promise<any>{
+//   try{
+//     const response=await this.http.get(`https://localhost:7044/getOrders`).toPromise();
+//     return response;
+//     }
+//     catch (error) {
+//       console.error('Error retrieving user orders:', error);
+//       throw error;
+//     }
+// }
 async getCartValue(): Promise<any>{
   try{
     const response=await this.http.get(`https://localhost:7044/getCartValue`).toPromise();

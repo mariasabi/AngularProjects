@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Modal } from 'bootstrap';
 import { ORDER_PLACED, ORDER_PLACED_MES, OUT_OF_STOCK, OUT_OF_STOCK_MES } from '../../constants/notifications';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -25,7 +26,7 @@ export class CartComponent implements OnInit {
   cartItems: CartItem[]=[];
   // private cartModal: Modal | null = null;
   // private modalInstance: any;
-constructor(private apiService:ApiService,private toastr:ToastrService,
+constructor(private cartService:CartService,private apiService:ApiService,private toastr:ToastrService,
   public dialogRef: MatDialogRef<CartComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
 ){}
@@ -48,7 +49,8 @@ closeCart() {
   // if (this.cartModal) {
   //   this.cartModal.hide();
   // }
-  this.dialogRef.close();
+  console.log('Cart no: ',this.cartItems.length);
+  this.dialogRef.close(this.cartItems.length);
 }
 async getCartValue(): Promise<void> {
   try {
@@ -85,7 +87,7 @@ async getCartValue(): Promise<void> {
         {
           await this.getCartValue();
           this.cartItems=data;
-     
+          this.cartService.updateCartItemNo(data.length);
         console.log(this.cartItems);
       })
       .catch((error: any) => {
@@ -97,7 +99,7 @@ async getCartValue(): Promise<void> {
     .then(async(data:CartItem[])=>
       {await this.getCartValue();
         this.cartItems=data;
-   
+        this.cartService.updateCartItemNo(data.length);
       console.log(this.cartItems);
     })
     .catch((error: any) => {

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SuccessMessageComponent } from "../success-message/success-message.component";
@@ -17,6 +17,7 @@ import { filter } from 'rxjs';
 import { ORDER_PLACED, ORDER_PLACED_MES } from '../constants/notifications';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog } from '@angular/material/dialog';
+import { CartService } from './cart.service';
 declare var bootstrap: any;
 @Component({
   selector: 'app-user',
@@ -25,15 +26,28 @@ declare var bootstrap: any;
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
-export class UserComponent implements OnInit{
+export class UserComponent implements OnInit,AfterViewInit{
   @ViewChild(CartComponent) cartComponent!: CartComponent;
   @ViewChild(SearchBarComponent) searchBarComponent!:SearchBarComponent;
+  // @ViewChild(ItemCardComponent) itemCard!:ItemCardComponent;
+  // ngAfterViewInit() {
+  //   this.itemCard.cartItemNo.subscribe(data => {
+  //     console.log('Received from child:', data);
+  //     this.cartItemNum=data;
+  //   });
+  // }
 userName!: string;
   ordersVisible: boolean=false;
   cartValue: number=0;
   itemData: ShortItem[]=[];
   search: boolean=false;
-  constructor(public dialog: MatDialog,private route:ActivatedRoute,private router:Router,private apiService:ApiService,private jwtService:JwtService, private toastr:ToastrService){}
+  constructor(private cartService: CartService,private cdr: ChangeDetectorRef,public dialog: MatDialog,private route:ActivatedRoute,private router:Router,private apiService:ApiService,private jwtService:JwtService, private toastr:ToastrService){}
+  ngAfterViewInit(): void {
+   this.cartService.cartItemNo$.subscribe((count: number) => {
+  console.log('Updated cart item count:', count);
+  this.cartItemNum = count;
+});
+}
   title = $localize`Quick Buy`;
 loading:boolean=false;
   cartItems: CartItem[]=[];
@@ -44,21 +58,26 @@ loading:boolean=false;
  response!:any;
  buttonName!:string;
  cartVisible=false;
-
+cartItemNum:number=0;
  async ngOnInit(): Promise<void> {
   this.route.queryParams.subscribe(params => {
      this.userName = params['name'];
      console.log(this.userName);
   });
 
-    // Subscribe to router events to reset search state on navigation
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       this.search = false;
     });
+this.getCartItemNo();
 
  }
+
+async getCartItemNo(){
+  var cartItems=await this.apiService.getCartItems();
+  this.cartItemNum=cartItems.length;
+}
 
  logout(){
   this.jwtService.logout();
@@ -73,22 +92,26 @@ loading:boolean=false;
    
     }
 
-
+// public cartItemNoUpdate(event: any){
+//   console.log(event);
+//   this.cartItemNum=event;
+//   // this.cdr.detectChanges();
+// }
 openCart(){
-  // this.clearSearch();
-  // this.cartVisible=true;
+
   const dialogRef = this.dialog.open(CartComponent, {
     width: '200rem',
-    data: {} // pass any data if needed
+    data: {} 
   });
-  dialogRef.afterClosed().subscribe((result: any) => {
-    if (result) {
+  dialogRef.afterClosed().subscribe((result: number) => {
+
+      // this.cartItemNum=result;
       console.log(result);
-    }
-  });
+
+    });
 }
 closeCart(){
-  this.cartVisible=false;
+  this.cartVisible=false; 
 }
 // showPurchaseMessage() {
 //   this.toastr.success(ORDER_PLACED_MES,ORDER_PLACED, {
@@ -98,7 +121,7 @@ closeCart(){
 // }
 searchResults(searchQuery:string) {
   if (!searchQuery.trim()) {
-    return;  // Do not proceed if the search query is empty or only whitespace
+    return;  
   }
     this.search=true;
     this.loading=true;
